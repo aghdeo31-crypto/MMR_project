@@ -1,0 +1,13 @@
+{
+  "schema": "MMR_FONT_ONLY_DIFF_GATE_SELFTEST_V1",
+  "good_exit_code": 0,
+  "good_classification": "PASS_FONT_ONLY_DIFF",
+  "good_changed_bytes": 4,
+  "good_violations": 0,
+  "bad_exit_code": 2,
+  "bad_classification": "FAIL_NON_FONT_CHANGE_DETECTED",
+  "bad_changed_bytes": 5,
+  "bad_violations": 1,
+  "pass": true,
+  "note": "Synthetic unit test only; no ROM/runtime evidence."
+}
