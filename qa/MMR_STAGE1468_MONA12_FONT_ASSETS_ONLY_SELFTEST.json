@@ -1,0 +1,28 @@
+{
+  "schema": "MMR_STAGE1468_MONA12_FONT_ASSETS_ONLY_SELFTEST_V1",
+  "classification": "PASS",
+  "synthetic_baseline": {
+    "size": 4194304,
+    "orientation": "bit0_top",
+    "pointer_table_exact": true,
+    "blank_failsafe_exact": true,
+    "three_font_bytes_intentionally_mutated": true
+  },
+  "result": {
+    "classification": "PASS_FONT_ASSETS_ONLY_CANDIDATE_BUILT",
+    "resolved_orientation": "bit0_top",
+    "changed_bytes": 3,
+    "diff_runs": [
+      {"start":"0x358001","end_exclusive":"0x358002","bytes":1},
+      {"start":"0x3589C7","end_exclusive":"0x3589C8","bytes":1},
+      {"start":"0x35E1AF","end_exclusive":"0x35E1B0","bytes":1}
+    ],
+    "pointer_table_changed": false,
+    "blank_failsafe_changed": false,
+    "checksum_bytes_changed": false,
+    "d12_kmode_ecc6_changed": false,
+    "translation_bytes_changed": false,
+    "source_token_0x58_changed": false
+  },
+  "note": "Synthetic mechanical selftest only. No real Stage1467 ROM was available in this chat and no runtime evidence is promoted."
+}
