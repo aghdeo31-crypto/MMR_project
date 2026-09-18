@@ -1,0 +1,20 @@
+{
+  "schema": "MMR_MONA12_12X12_SOURCE_V2",
+  "font": "Mona12.ttf",
+  "font_sha256": "b305cc135d9fc543792f7591dc9008a82e8cf1c9e6a4ed2127745e2924d000c1",
+  "cell": [12,12],
+  "font_px": 12,
+  "y_offset": -1,
+  "horizontal_alignment": "center",
+  "glyph_count": 11172,
+  "clip_count": 0,
+  "raw_bytes": 268128,
+  "mean_pixels": 49.36385606874329,
+  "width_counts": {"11":4294,"10":6878},
+  "margin_pair_counts": {"0,1":4294,"1,1":6878},
+  "neutral_source_sha256": "65bec9405d5e16ebe6c5c75c5e4f314a8a7be4a22a9f7f961d4cf89321f92249",
+  "source_format": "12 rows x BE16; upper 12 bits pixels; neutral source only, not MMR ROM packing",
+  "rom_written": false,
+  "font_embedded_or_redistributed": false,
+  "decision": "Use centered v2 as the first MMR original-style FONT_ONLY raster candidate; retain raw v1 only for A/B comparison."
+}
