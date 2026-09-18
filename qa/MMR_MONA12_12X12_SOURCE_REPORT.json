@@ -1,0 +1,23 @@
+{
+  "profile": "MMR_MONA12_REGULAR_12X12_SOURCE_V1",
+  "font_input_name": "Mona12.ttf",
+  "font_input_sha256": "b305cc135d9fc543792f7591dc9008a82e8cf1c9e6a4ed2127745e2924d000c1",
+  "font_embedded_or_redistributed": false,
+  "font_px": 12,
+  "cell": [12, 12],
+  "glyph_count": 11172,
+  "source_format": "12 rows x big-endian 16-bit; upper 12 bits are pixels",
+  "bytes_per_glyph": 24,
+  "raw_bytes": 268128,
+  "rom_layout_assumed": false,
+  "rom_written": false,
+  "missing_count": 0,
+  "overflow_count": 0,
+  "mean_pixels": 49.364,
+  "mean_bbox_w": 10.384,
+  "mean_bbox_h": 10.995,
+  "vertical_alignment": "draw y=-1; typical Hangul visible body rows 0..10; row11 breathing",
+  "translation_authority": "JAPANESE_ORIGINAL",
+  "english_translation_role": "AUXILIARY_REFERENCE_ONLY",
+  "next": "Map these Unicode glyphs through the current Stage1467 font-slot/packer authority; do not invent slot packing here."
+}
