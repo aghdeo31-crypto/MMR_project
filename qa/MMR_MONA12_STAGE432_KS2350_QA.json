@@ -1,0 +1,59 @@
+{
+  "schema": "MMR_MONA12_STAGE432_KS2350_LAYOUT_PREP_V1",
+  "classification": "PASS_LAYOUT_AND_MAPPING__PACKING_ORIENTATION_DUAL_CANDIDATE",
+  "font_input_name": "Mona12.ttf",
+  "font_input_sha256": "b305cc135d9fc543792f7591dc9008a82e8cf1c9e6a4ed2127745e2924d000c1",
+  "font_redistributed": false,
+  "raster": {"font_px":12,"cell":[12,12],"y_offset":-1,"horizontal":"centered"},
+  "ksx1001": {"glyphs":2350,"first":"가","last":"힝","order":"EUC-KR B0A1..C8FE row-major"},
+  "record_contract": {"bytes":25,"width_byte":"0C","columns":12,"column_word":"LE16"},
+  "vertical_bit_orientation": "UNRESOLVED_FROM_RECOVERED_STAGE432_DOCS__BOTH_EMITTED",
+  "orientations": {
+    "bit0_top": {
+      "EB_bytes":32750,
+      "EB_sha256":"f0cfcf3ef4e18b7c716dcf3a12361ae869a0fe3459191c537591ea029dd52473",
+      "EC_bytes":26000,
+      "EC_sha256":"cfc87d88b25120d003c0e397ecd1637642b1f06bf7a4eeba6e454d91583c080a",
+      "unique_records":2350,"blank_records":0
+    },
+    "bit15_top": {
+      "EB_bytes":32750,
+      "EB_sha256":"bb79bb80baddafad11bbaecbee7e48723ab6eec35ff5ea552e997eace267ff62",
+      "EC_bytes":26000,
+      "EC_sha256":"deb6c54a54ab2737ef84f8082ebe1109d5836c1abeb2ca1c6b97322398217c47",
+      "unique_records":2350,"blank_records":0
+    }
+  },
+  "pointer_table": {
+    "entries":2400,
+    "bytes":7200,
+    "sha256":"d04bcbcd62d609e98d3d5cc0907244dfddacd1581d629bdb90f374d165ff6f72",
+    "address":"$EA:C000",
+    "candidate_encoding":"addr_lo,addr_hi,bank"
+  },
+  "banks": {
+    "part1":"$EB:8000 IDs 0..1309",
+    "part2":"$EC:8000 IDs 1310..2349",
+    "blank_failsafe":"$EC:E600 IDs 2350..2399"
+  },
+  "bank_crossing_real_records": [],
+  "pilot_token_identity": {
+    "탄":{"id":1999,"euc_kr":"C5BA","private_token":"08 0D AF","expected":"08 0D AF","match":true},
+    "약":{"id":1379,"euc_kr":"BEE0","private_token":"08 09 C3","expected":"08 09 C3","match":true},
+    "보":{"id":963,"euc_kr":"BAB8","private_token":"08 07 63","expected":"08 07 63","match":true},
+    "급":{"id":155,"euc_kr":"B1DE","private_token":"08 01 FB","expected":"08 01 FB","match":true}
+  },
+  "pilot_all_match": true,
+  "blank_failsafe_candidate": {
+    "bytes":25,
+    "hex":"0C 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+    "sha256":"670a376755cfeb888285bd3330c397bf40635748b9c36a9566072fc72792ea3b",
+    "authority":"CANDIDATE_UNTIL_CURRENT_PACKER_COMPARE"
+  },
+  "safety": [
+    "NO_ROM_WRITE",
+    "NO_IPS_WRITE",
+    "NO_FONT_FILE_REDISTRIBUTION",
+    "DO_NOT_SELECT_VERTICAL_BIT_ORIENTATION_WITHOUT_CURRENT_PACKER_OR_STAGE432_ASSET_COMPARISON"
+  ]
+}
