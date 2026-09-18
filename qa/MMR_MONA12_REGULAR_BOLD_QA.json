@@ -1,0 +1,43 @@
+{
+  "schema": "MMR_MONA12_REGULAR_BOLD_QA_V1",
+  "regular": {
+    "font": "Mona12.ttf",
+    "yoff": -1,
+    "glyphs": 11172,
+    "empty": 0,
+    "clip": 0,
+    "mean_pixels": 49.36385606874329,
+    "min_pixels": 24,
+    "max_pixels": 67,
+    "mean_w": 10.384353741496598,
+    "mean_h": 10.994897959183673
+  },
+  "bold": {
+    "font": "Mona12-Bold.ttf",
+    "yoff": -1,
+    "glyphs": 11172,
+    "empty": 0,
+    "clip": 0,
+    "mean_pixels": 62.8890082348729,
+    "min_pixels": 30,
+    "max_pixels": 84,
+    "mean_w": 10.480397422126746,
+    "mean_h": 10.994897959183673
+  },
+  "textkr": {
+    "font": "Mona12TextKR.ttf",
+    "yoff": -1,
+    "glyphs": 11172,
+    "empty": 0,
+    "clip": 0,
+    "mean_pixels": 49.36385606874329,
+    "min_pixels": 24,
+    "max_pixels": 67,
+    "mean_w": 10.384353741496598,
+    "mean_h": 10.994897959183673
+  },
+  "regular_vs_bold_bitmap_diff_glyphs": 11172,
+  "regular_vs_textkr_bitmap_diff_glyphs": 0,
+  "bold_pixel_density_ratio": 1.2739889717548545,
+  "decision": "Mona12 Regular primary; Bold rejected for first FONT_ONLY candidate"
+}
