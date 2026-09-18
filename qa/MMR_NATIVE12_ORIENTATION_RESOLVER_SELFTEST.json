@@ -1,0 +1,30 @@
+{
+  "schema": "MMR_NATIVE12_ORIENTATION_RESOLVER_SELFTEST_V1",
+  "classification": "PASS",
+  "bit0_bank_test": {
+    "classification": "PASS_BIT0_TOP",
+    "orientation": "bit0_top",
+    "safe_to_choose_orientation": true,
+    "records_with_nonzero_high_padding_bits_12_15": 0,
+    "records_with_nonzero_low_padding_bits_0_3": 2350
+  },
+  "bit15_bank_test": {
+    "classification": "PASS_BIT15_TOP",
+    "orientation": "bit15_top",
+    "safe_to_choose_orientation": true,
+    "records_with_nonzero_high_padding_bits_12_15": 2350,
+    "records_with_nonzero_low_padding_bits_0_3": 0
+  },
+  "synthetic_rom_test": {
+    "classification": "PASS_BIT0_TOP",
+    "pointer_mismatch_bytes": 0,
+    "safe_to_choose_orientation": true
+  },
+  "synthetic_bad_pointer_test": {
+    "classification": "HOLD_POINTER_LAYOUT_MISMATCH",
+    "pointer_mismatch_bytes": 1,
+    "safe_to_choose_orientation": false,
+    "exit_code": 2
+  },
+  "note": "Synthetic mechanical selftest only; no new REAL MMR runtime evidence."
+}
