@@ -1,0 +1,72 @@
+{
+  "schema": "MMR_STAGE1468_MONA12_FONT_ONLY_READINESS_V1",
+  "date_kst": "2026-09-19",
+  "parent": {
+    "stage": 1467,
+    "classification": "RC2_TEST",
+    "rom": "Metal_Max_Returns_Korean_RC2_TEST_20260918.sfc",
+    "sha256": "29EBF0A5DAB0A646FF9AF6E68127AAE6C8182AB2129C2819FB37177A94453BEB",
+    "supersedes_stage1459_rc1": true
+  },
+  "font_policy": {
+    "family": "Mona12 Regular",
+    "font_px": 12,
+    "cell": [12,12],
+    "y_offset": -1,
+    "horizontal_alignment": "centered",
+    "charset": "KS X 1001 Hangul 2350",
+    "font_file_committed": false
+  },
+  "native12_contract": {
+    "record_bytes": 25,
+    "record": "0C + 12 x LE16 column words",
+    "pointer_table_cpu": "$EA:C000",
+    "pointer_table_file": "0x354000",
+    "pointer_entries": 2400,
+    "eb_font_cpu": "$EB:8000",
+    "eb_font_file": "0x358000",
+    "eb_records": 1310,
+    "eb_end_exclusive": "0x35FFEE",
+    "ec_font_cpu": "$EC:8000",
+    "ec_font_file": "0x360000",
+    "ec_records": 1040,
+    "ec_end_exclusive": "0x366590",
+    "blank_cpu": "$EC:E600",
+    "blank_file": "0x366600"
+  },
+  "slot_mapping_proof": {
+    "tan": {"char":"탄","id":1999,"token":"08 0D AF","match":true},
+    "yak": {"char":"약","id":1379,"token":"08 09 C3","match":true},
+    "bo": {"char":"보","id":963,"token":"08 07 63","match":true},
+    "geup": {"char":"급","id":155,"token":"08 01 FB","match":true},
+    "all_match": true
+  },
+  "static_tools": {
+    "ks2350_builder_commit": "78a4ff092b3ae1a14b21bfd04ef2979ce23a05f4",
+    "ks2350_qa_commit": "916934016e6593e8d4f44777f736b35e0af3c4df",
+    "orientation_resolver_commit": "9a6e1e32e9a8e2cb1de2722c25bcf465003e59b6",
+    "orientation_selftest_commit": "c2ad9e66c4b558d8f1186d0c0f162ae889900096",
+    "font_assets_only_builder_commit": "3191638a834b594680142d271bcf7725d84496b9",
+    "font_assets_only_selftest_commit": "2f41a4e36fafbb35fc30ff39ecb165588b219318",
+    "runner_commit": "d5c0e9ae26c747d11fdb48ac582f9ce6bc51a5bf",
+    "handoff_commit": "df26bf844922d98262564b65b6f9b685bd07d98d"
+  },
+  "selftests": {
+    "bit0_orientation": "PASS",
+    "bit15_orientation": "PASS",
+    "pointer_corruption_fail_closed": "PASS",
+    "font_assets_only_nonfont_diff_zero": "PASS"
+  },
+  "translation_policy": {
+    "top_authority": "JAPANESE_ORIGINAL",
+    "english_role": "AUXILIARY_ONLY",
+    "ordinal_or_english_offset_binding": false,
+    "edit_without_exact_jp_binding": false
+  },
+  "runtime": {
+    "stage1468_candidate_built_from_real_parent": false,
+    "runtime_qa": "NOT_RUN",
+    "new_real": false
+  },
+  "next": "Run scripts/RUN_STAGE1468_MONA12_FONT_ASSETS_ONLY.ps1 with local Mona12.ttf against the exact Stage1467 parent; require orientation and FONT_ONLY diff PASS before runtime smoke."
+}
