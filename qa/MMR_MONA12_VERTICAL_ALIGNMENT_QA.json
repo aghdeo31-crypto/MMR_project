@@ -1,0 +1,15 @@
+{
+  "schema": "MMR_MONA12_VERTICAL_ALIGNMENT_QA_V1",
+  "glyphs": 11172,
+  "font_px": 12,
+  "cell": [12, 12],
+  "results": [
+    {"y_offset":-3,"clipped_glyphs":11172,"top_min":-2,"top_max":-2,"bottom_min":8,"bottom_max":9,"left_min":0,"right_max":11,"width_min":10,"width_max":11,"height_min":10,"height_max":11},
+    {"y_offset":-2,"clipped_glyphs":11172,"top_min":-1,"top_max":-1,"bottom_min":9,"bottom_max":10,"left_min":0,"right_max":11,"width_min":10,"width_max":11,"height_min":10,"height_max":11},
+    {"y_offset":-1,"clipped_glyphs":0,"top_min":0,"top_max":0,"bottom_min":10,"bottom_max":11,"left_min":0,"right_max":11,"width_min":10,"width_max":11,"height_min":10,"height_max":11},
+    {"y_offset":0,"clipped_glyphs":0,"top_min":1,"top_max":1,"bottom_min":11,"bottom_max":12,"left_min":0,"right_max":11,"width_min":10,"width_max":11,"height_min":10,"height_max":11},
+    {"y_offset":1,"clipped_glyphs":11115,"top_min":2,"top_max":2,"bottom_min":12,"bottom_max":13,"left_min":0,"right_max":11,"width_min":10,"width_max":11,"height_min":10,"height_max":11}
+  ],
+  "selected_y_offset": -1,
+  "selection_reason": "0 clipped glyphs; body begins at row 0 and generally keeps bottom breathing room. y=0 is also clip-free but one row lower."
+}
