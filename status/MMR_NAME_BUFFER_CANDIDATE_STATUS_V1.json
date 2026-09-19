@@ -1,0 +1,19 @@
+{
+  "schema": "MMR_NAME_BUFFER_CANDIDATE_STATUS_V1",
+  "classification": "EXTERNAL_CORROBORATED_CANDIDATE__JP_RUNTIME_CONFIRMATION_REQUIRED",
+  "hunter": {
+    "candidate_range": "7E:8000..8004",
+    "external_notes_conflict": [
+      "source A describes positions 1..5 and warns fifth char can extend outside frame",
+      "source B labels 7E8000 as name 1..4 chars"
+    ],
+    "authority": false
+  },
+  "tank1": {
+    "candidate_range": "7E:8300..8305",
+    "candidate_length": 6,
+    "authority": false
+  },
+  "probe": "tools/mmr_name_buffer_probe.lua",
+  "promotion_rule": "Japanese original runtime write/readback must confirm semantics before these addresses become project authority."
+}
