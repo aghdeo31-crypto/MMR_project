@@ -1,0 +1,31 @@
+{
+  "schema": "MMR_MONA12_QUALITY_STATIC_V1",
+  "font_sha256": "b305cc135d9fc543792f7591dc9008a82e8cf1c9e6a4ed2127745e2924d000c1",
+  "glyphs": 2350,
+  "blank": 0,
+  "clipped": 0,
+  "duplicate_bitmap_groups": 0,
+  "one_jamo_pairs_hamming_le_1": 166,
+  "one_jamo_pairs_hamming_le_2": 601,
+  "one_jamo_pairs_hamming_le_3": 1198,
+  "sentinels": {
+    "한/힌": 39,
+    "한/이": 60,
+    "이/히": 15,
+    "개/게": 3,
+    "애/에": 3,
+    "독/득": 1,
+    "눅/늑": 1
+  },
+  "identity_sentinels": {
+    "한": {"id":2210,"token":"08 0E E2","decoded":"한","pass":true},
+    "힌": {"id":2344,"token":"08 0F C8","decoded":"힌","pass":true},
+    "이": {"id":1547,"token":"08 0A CB","decoded":"이","pass":true},
+    "히": {"id":2342,"token":"08 0F C6","decoded":"히","pass":true}
+  },
+  "classification": "PASS_STRUCTURE__CUSTOM_REVIEW_REQUIRED",
+  "interpretation": {
+    "한_to_힌_or_이": "NOT_EXPLAINED_BY_MONA12_VISUAL_SIMILARITY__AUDIT_TOKEN_ID_RUNTIME_MAPPING",
+    "low_distance_pairs": "CUSTOM_ART_REVIEW_REQUIRED"
+  }
+}
