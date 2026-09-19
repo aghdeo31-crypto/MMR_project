@@ -1,4 +1,4 @@
-# MMR Stage1468 — SYSTEM/UI + NAME ENTRY PRIORITY handoff
+# MMR Stage1468 — SYSTEM/UI + NAME ENTRY PRIORITY handoff v2
 
 Date: 2026-09-19 KST
 Status: OFFLINE_PREP / RELEASE HOLD / NO_NEW_REAL
@@ -11,247 +11,273 @@ Expected parent ROM:
 - Metal_Max_Returns_Korean_RC2_TEST_20260918.sfc
 - SHA256 29EBF0A5DAB0A646FF9AF6E68127AAE6C8182AB2129C2819FB37177A94453BEB
 
-Japanese original authority:
+Japanese original:
 - Metal Max Returns (Japan).sfc
-- size 4,194,304
+- 4,194,304 bytes
 - CRC32 4396A35B
 - SHA256 6a68e1806d8d72accb4a5218330210e178880216863c1c38b8865032c5c28724
 
-No release promotion is allowed from a different parent/candidate SHA.
+No evidence mixing across candidate SHA.
 
 ## Priority
 
-1. name-entry original behavior/font/cursor/binding closure
-2. system/UI surface inventory and regression
-3. font-family finalization
-4. Japanese-original dialogue review
-5. full language/art sweep
-6. release promotion
+1. NAME ENTRY physical contract + original geometry
+2. SYSTEM/UI P0 surfaces
+3. small-font family closure
+4. dialogue Mona12 integration
+5. Japanese-original dialogue audit
+6. full runtime / language sweep
+7. release
 
-Dialogue polish must not outrank SYSTEM/UI blockers.
+## Corrected name-entry authority model
+
+Historical MMR handoff explicitly states that these remain unresolved until Japanese-original tracing:
+- physical name code width
+- selectable code count/control range
+- name buffer format/length
+- terminator/space/empty-name contract
+- save data name representation
+- name-entry font address/compression/tile path
+- physical cell step and cursor geometry
+- whether every name consumer shares one renderer
+
+Therefore:
+
+FORBIDDEN assumptions:
+- logical index 0..199 == physical code 00..C7
+- dialogue KS2350/private08 token == name-entry code
+- 1-byte or 2-byte name storage by guess
+- English-patch name table == Japanese authority
+
+### private08 probe status
+
+tools/mmr_name_entry_rom_binding_gate.py is now PROBE ONLY.
+
+It may search for a possible 08 hi lo page payload, but:
+- absence is not a failure;
+- a hit is not authority;
+- release/preflight does not depend on it unless independent tracing proves that is the actual name-entry encoding.
+
+Status:
+- status/MMR_NAME_ENTRY_PRIVATE08_PROBE_STATUS.json
+- commit c9fc9f1ee3eccd97494b0cc2c17af07a8b74be0b
+
+## Format-agnostic physical binding gate
+
+tools/mmr_name_entry_physical_binding_gate.py
+latest commit 976da41ef71091a58e47fa1463bfee0a4db3a6cf
+
+No encoding family is assumed.
+
+### STATIC PASS
+PASS_NAME_ENTRY_PHYSICAL_BINDING_STATIC requires:
+- exact Japanese-original encoding/storage contract confirmed
+- candidate SHA binding
+- 200 logical cells -> 200 explicit physical code payloads
+- all 200 roundtrip to intended chars
+- control collision checked for all 200
+- four page table witnesses tied to the real physical contract
+
+STATIC PASS admits a runtime TEST candidate only.
+
+### FULL PASS
+PASS_NAME_ENTRY_PHYSICAL_BINDING_FULL additionally requires:
+- selection -> name buffer path confirmed
+- delete/complete/cancel semantics confirmed
+- save -> reset -> load roundtrip confirmed
+- runtime evidence attached
+
+FULL PASS is required for release.
+
+Template:
+- qa/MMR_NAME_ENTRY_PHYSICAL_BINDING_TEMPLATE.json
+- commit ef6ee2ab84fbc724ba7eac652647512415dbd5ea
 
 ## Name-entry font
 
-Old physical 12x12 name-entry assumption is superseded.
+Old physical 12x12 name-entry assumption is superseded by runtime observation that the name font is smaller than dialogue.
 
-Retained:
-- 200 unique logical Hangul syllables
-- 4 pages x 50
-- 10 columns x 5 rows
-
-Primary physical-font candidate:
+Primary candidate:
 - MMR Mona10 Name Custom v0.2
 - Mona10 Regular native 10px
-- neutral raster candidate 10x12
-- current 200-char visible bodies mostly 8..9px
+- 10x12 neutral raster candidate
+- body mostly 8..9px on current name table
 - no geometric scaling
 - separate from dialogue Mona12
 
-Static:
-- 200/200 chars unique and inside KS2350
-- char -> KS2350 ID -> 08 hi lo -> same char = 200/200 PASS
-- blank 0 / clipped 0 / duplicate bitmap 0
-- <=2px confusable set reduced to two review-only pairs
-- 한/힌/이/히 remain runtime/mapping sentinels, not art-similarity suspects
+Logical table:
+- 200 unique syllables
+- 4 x 50
+- 10 x 5
+- logical ordering remains valid
+- physical mapping remains independently proven, never inferred
 
-Sentinels:
-- 한 ID2210 / 08 0E E2
-- 힌 ID2344 / 08 0F C8
-- 이 ID1547 / 08 0A CB
-- 히 ID2342 / 08 0F C6
+## Name-entry geometry
 
-## Name-entry hard gates
-
-### A. Japanese-original comparison
-qa/MMR_NAME_ENTRY_ORIGINAL_COMPARE_TEMPLATE.json
-
-Covers:
-- font visible bbox/size relation to dialogue
-- baseline/top-bottom margins
-- cursor row step/box/anchor
-- adjacent-row overlap
-- input/delete/cancel/complete
-- max length/over-limit
-- save/reset/load
-- consumer displays and state after exit
-
-### B. Automatic five-row geometry
 tools/mmr_name_entry_geometry_compare.py
 
-Current V3:
+Requires:
 - JP original row1..row5 PNG
-- KR candidate row1..row5 PNG
-- exact Japanese ROM SHA pinned
-- exact candidate SHA mandatory
-- all ten capture SHA256s recorded
+- candidate row1..row5 PNG
+- exact candidate SHA
+- Japanese original SHA pinned
+- tight grid crop
 
 Hard:
-- candidate adjacent-row overlap = 0px
-- five-row Y step stable
-- original/candidate row step match within tolerance
-- cursor height match within tolerance
-- visible name-font height match within tolerance
+- adjacent-row visible-glyph overlap = 0 px
+- row step stable
+- original/candidate step matched
+- cursor height matched
+- name visible height matched within tolerance
+- all ten capture SHA256s recorded
 
-Commits:
-- auto screenshot upgrade 42bf7058a5cd3aa3e546b1e25655e0554f824947
-- capture/ROM SHA evidence binding e8061e169238ef577a4c06ef4caf326efcfa3dd1
-- capture protocol 53387ad6b854572ddcb31d887476f5da30d2679d
-- selftest ab02d4102760bf31d216eb94b5f1765d0f653619
+No font shifting to hide a cursor bug.
 
-### C. Exact ROM page binding
-tools/mmr_name_entry_rom_binding_gate.py
+## System/UI compact font
 
-Expected payload:
-- page 1: 50 chars / 150 bytes
-- page 2: 50 chars / 150 bytes
-- page 3: 50 chars / 150 bytes
-- page 4: 50 chars / 150 bytes
-- encoding: private08 08 hi lo in KS2350 ID order
+Full-coverage compact candidate:
+- MMR Mona10 UI Custom v0.2
+- KS2350 2350/2350
+- blank 0
+- clip 0
+- duplicate bitmap groups 0
 
-Static PASS requires each page byte sequence exactly once in exact candidate ROM.
-Runtime cursor/index -> table selection remains a separate runtime requirement.
+Mona10-Bold rejected as primary:
+- about +26.4% mean set-pixel density
+- exact duplicate group exists: 틤 / 팀
 
-Commits:
-- gate 0219d69193e5445044c35d27c2246d246afe02fd
-- selftest c3e3c884f02a40c4787f24a14923a407d88d0a89
+Files:
+- tools/mmr_mona10_ui_custom_v0_2.py
+- qa/MMR_MONA10_UI_CUSTOM_V0_2_KS2350_QA.json
+- status/MMR_SMALL_UI_FONT_CANDIDATE_STATUS_V1.json
 
-### D. Runtime identity
-Every cell:
-screen logical cell -> visible glyph -> selected glyph -> committed name
-must match.
+Important:
+full KS2350 coverage does NOT authorize the font on every UI surface.
 
-All 200 cells required; 한/힌/이/히 are mandatory sentinels.
+## Actual P0 UI corpus gate
 
-## System/UI font-family inventory
+tools/mmr_small_ui_corpus_font_risk.py
+commit 6441d72ab7c20713f65c831bab74ae3740a2de2d
 
-qa/MMR_UI_FONT_SURFACE_MATRIX_V1.json
-commit 09f4375ce8aa82e11f83b3ed6cc1e9b84502b7c8
-
-P0:
+Required P0 text ledger surfaces:
 - MEMORY_CENTER_NOTICE
 - RECORD_SELECTION
-- NAME_ENTRY
 - MAIN_MENU
 - ITEM_EQUIPMENT_STATUS
 - SHOP_SERVICE_UI
 - BATTLE_UI
 - SAVE_LOAD_UI
 
-Rules:
-- no automatic Mona12 reuse
-- no automatic Mona10 reuse
-- original visible height/baseline/row pitch first
-- renderer/state route remains separate until proven shared
+Only exact project/runtime Korean UI strings are allowed in the ledger.
+Do not invent missing strings.
 
-Generic fixed-text comparator:
-- tools/mmr_ui_surface_compare.py
-- commit a27d5433d7d08f246f1bcb590c8da05b219dfce4
-- selftest cc69314ad3db88ab37f4ee1406c5501a6c875def
-- capture protocol 6dbbb396e3682a6d6354afdb38e6547f1ca89b9f
+The gate:
+- extracts actual P0 Hangul usage
+- verifies KS2350 coverage
+- ranks close Mona10 v0.2 pairs
+- prioritizes pairs used together on the same P0 surface
 
-Measures:
-- visible height
-- top anchor
+This prevents needless manual changes to unused KS2350 glyphs.
+
+Template:
+- qa/MMR_P0_UI_TEXT_LEDGER_TEMPLATE.tsv
+- commit 2f6cca4bcfed546d7ae40c3af0127bef14a26ab4
+
+## UI surface compare
+
+tools/mmr_ui_surface_compare.py
+
+P0 surfaces:
+- Memory Center notice
+- record selection
+- main menu
+- item/equipment/status
+- shop/service UI
+- battle UI
+- save/load UI
+
+Compare Japanese original vs exact candidate:
+- visible font height
+- top anchor/baseline class
 - crop overflow
 - size class
-and binds PNG/manifest evidence to candidate SHA.
+- screenshot/manifest SHA
 
-## Chained SYSTEM/UI preflight
+Name-entry cursor motion remains a separate five-capture geometry gate.
+
+## Stage1468 chained preflight v2
 
 scripts/RUN_STAGE1468_SYSTEM_UI_PREFLIGHT.ps1
-commit 39096e5bb14a75e2a071e30d8f8c381d680537b7
+latest commit 3a6a048fc71d8b7ec509cecd1bb311d5a8a11c88
 
-Required input:
-- exact candidate ROM + expected SHA
-- JP original name row1..row5 captures
-- candidate name row1..row5 captures
-- name-grid crop
-- seven-surface P0 UI capture plan
+Mandatory:
+1. exact candidate SHA
+2. KS2350 identity
+3. format-agnostic name-entry PHYSICAL BINDING STATIC PASS
+4. original-vs-candidate five-row name geometry PASS
+5. all seven fixed P0 system/UI surface comparisons PASS
 
-Runs in fail-closed order:
-1. KS2350 glyph identity
-2. exact four-page name ROM binding
-3. name-entry original-vs-candidate five-row geometry
-4. seven fixed P0 system/UI surface compares
+Optional:
+- private08 reconnaissance probe
 
-PASS classification:
-PASS_STAGE1468_SYSTEM_UI_PREFLIGHT
+Preflight PASS only allows runtime TEST.
+It never means RC/final.
 
-Even PASS only allows a RUNTIME TEST candidate.
-It never allows RC/final directly.
-
-Capture plan:
-- qa/MMR_STAGE1468_P0_UI_CAPTURE_PLAN_TEMPLATE.json
-- commit 723414581a8167f0a38b080f14d794c9e5d53c86
-
-Preflight contract:
-- qa/MMR_STAGE1468_SYSTEM_UI_PREFLIGHT_SELFTEST.json
-- commit 06bbf67391ee6e81ff60c0fb0221ddf17ca9c1ec
-
-## Dialogue font
-
-Dialogue primary candidate remains MMR Mona12 Custom.
-Do not integrate into a release candidate until name-entry/system/UI blockers are closed.
-
-## Translation authority
-
-Japanese original is top authority.
-English translation is auxiliary only.
-No English offsets/order as Japanese record binding.
-No semantic shortening to avoid missing glyphs.
-
-## Release promotion
+## Release promotion v5
 
 tools/mmr_release_promotion_gate.py
+latest commit f9313838a93f1a5caa5066d7e61d69e296e52c46
 
-Current V4:
-MMR_THIRD_ATTEMPT_RELEASE_PROMOTION_V4_NAME_BINDING_LOCKED
-commit 9f3d2c1404c7f2a4c51e6d776c50056e12a23155
-
-Hard requirements include:
-- exact parent
-- name-entry JP original compare
-- automatic name-entry geometry PASS / adjacent overlap 0
-- exact four-page ROM binding PASS
+Release now requires:
+- exact parent/candidate
+- original-JP name comparison
+- automatic name geometry PASS, adjacent overlap 0
+- PHYSICAL BINDING FULL PASS
 - glyph identity
-- font structure/art/small-font family
+- font structure/art
+- small-font family complete
 - Japanese-original translation gate
-- static binary diff
-- critical system/UI/name-entry runtime matrix
+- binary diff
+- critical SYSTEM/UI/NAME runtime
 - full runtime matrix
 - language/art sweep
 
-One exact candidate SHA only.
-No evidence mixing across builds.
+No private08/1-byte/2-byte/dialogue-code assumption is accepted as name authority.
 
-## Exact restart when Codex/DevSpace returns
+## Exact restart when Codex returns
 
 1. Open H:\한글화\MMR_Project writable checkout.
 2. git status --short.
-3. Read latest local handoff/status and prove exact Stage1467 parent SHA.
-4. Locate actual Stage1467 name-entry page tables + cursor/state route; do not guess addresses.
-5. Run name-entry ROM binding gate on Stage1467/child.
-   - If FAIL: fix page payload/binding before font art.
-6. Capture Japanese-original name rows 1..5.
-7. Capture same candidate SHA name rows 1..5.
-8. Run automatic geometry compare.
-9. Bind Mona10 Name Custom v0.2 only to verified name-entry font route.
-10. Fix cursor Y step/box/anchor separately; adjacent overlap must be 0.
-11. Re-run all four pages, 200 cell identity, max length, save/reset/load.
-12. Capture seven P0 fixed system/UI surfaces in JP/KR.
-13. Run RUN_STAGE1468_SYSTEM_UI_PREFLIGHT.ps1.
-14. Only after SYSTEM/UI preflight PASS, continue dialogue font/JP-original translation integration.
-15. RC/final remains forbidden until release promotion gate returns RELEASE_ALLOWED.
+3. Verify Stage1467 exact parent SHA.
+4. Read current local latest handoff/status; do not resurrect superseded Stage.
+5. Trace Japanese original name selection table -> physical selected code -> temporary name buffer.
+6. Determine:
+   - actual code width/format
+   - page/table source
+   - terminator/length/space
+   - delete/complete/cancel
+   - save copy/restore
+7. Fill MMR_NAME_ENTRY_PHYSICAL_BINDING_TEMPLATE.json.
+8. Require PHYSICAL BINDING STATIC PASS.
+9. Capture Japanese and candidate row1..row5; require geometry PASS.
+10. Bind Mona10 Name Custom only to proven name-entry font route.
+11. Fix cursor geometry separately; adjacent overlap 0.
+12. Run all 200 selections and save/reset/load; upgrade binding to FULL.
+13. Recover exact P0 UI strings and fill P0 UI ledger.
+14. Measure each original UI surface before choosing Mona10/Mona12/other size.
+15. Run Stage1468 SYSTEM/UI preflight.
+16. Only then integrate dialogue Mona12 and Japanese-original dialogue corrections.
+17. Never label RC/final unless release promotion gate says RELEASE_ALLOWED.
 
 ## Current boundary
 
-Codex/DevSpace is not exposed in this chat.
-Latest File Library search did not recover the physical Stage1467 name-entry page/cursor source, so no code address is fabricated.
+Codex/DevSpace is still absent from this chat.
+Latest File Library search did not recover the physical Stage1467 name-table/cursor source.
 
 Therefore:
 - no local H: write claimed
-- no new candidate ROM claimed
-- no new REAL Mesen result claimed
-- all new work is static/offline tooling and fail-closed QA preparation
+- no new ROM claimed
+- no REAL runtime result claimed
+- new work remains fail-closed static/offline preparation
 
 NO_NEW_REAL.
