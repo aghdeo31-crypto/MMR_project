@@ -1,0 +1,22 @@
+{
+  "schema": "MMR_FONT_ART_REVIEW_V1",
+  "classification": "PENDING",
+  "font_family": "MMR Mona12 Custom",
+  "base": "Mona12 Regular 12px centered",
+  "p0_total": null,
+  "p0_pass": 0,
+  "p0_overridden": 0,
+  "p0_unresolved": null,
+  "small_font_family_complete": false,
+  "small_font_family_status": "OPEN",
+  "mandatory_sentinels": [
+    {"pair":"한/힌","status":"PENDING","note":"if wrong in runtime, audit mapping/token before art"},
+    {"pair":"한/이","status":"PENDING","note":"if wrong in runtime, audit mapping/token before art"},
+    {"pair":"이/히","status":"PENDING","note":""},
+    {"pair":"개/게","status":"PENDING","note":"low pixel distance"},
+    {"pair":"애/에","status":"PENDING","note":"low pixel distance"},
+    {"pair":"독/득","status":"PENDING","note":"1-pixel base difference"},
+    {"pair":"눅/늑","status":"PENDING","note":"1-pixel base difference"}
+  ],
+  "rule": "P0 pairs used by game corpus require visual review; ambiguous pairs require explicit override."
+}
