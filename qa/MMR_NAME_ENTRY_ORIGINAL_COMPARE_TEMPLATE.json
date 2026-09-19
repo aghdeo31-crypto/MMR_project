@@ -1,5 +1,5 @@
 {
-  "schema": "MMR_NAME_ENTRY_ORIGINAL_COMPARE_V2_CURSOR_GEOMETRY",
+  "schema": "MMR_NAME_ENTRY_ORIGINAL_COMPARE_V3_FONT_AND_CURSOR_GEOMETRY",
   "original_rom": {
     "name": "Metal Max Returns (Japan).sfc",
     "size": 4194304,
@@ -8,7 +8,14 @@
   },
   "candidate_sha256": "",
   "classification": "PENDING",
-  "rule": "No NAME_ENTRY PASS without original-JP comparison. Cursor must align to exactly one target row and must not overlap visible glyph pixels of adjacent rows.",
+  "font_policy": {
+    "dialogue_font": "MMR Mona12 Custom / 12px / 12x12",
+    "name_entry_font_candidate": "MMR Mona10 Name Custom v0.1 / native 10px / 10x12 raster",
+    "same_font_as_dialogue": false,
+    "geometric_scaling": false,
+    "note": "10x12 is a candidate raster only. Original JP defines physical cell/cursor geometry."
+  },
+  "rule": "No NAME_ENTRY PASS without original-JP comparison. Font occupancy and cursor geometry are separate mandatory contracts.",
   "comparisons": [
     {
       "id": "ENTRY_ROUTE",
@@ -41,6 +48,36 @@
       "notes": ""
     },
     {
+      "id": "NAME_FONT_VISIBLE_BBOX",
+      "expected": "MUST_MATCH_SCREEN_OCCUPANCY_OR_DOCUMENT",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": "Measure original visible glyph width/height vs Korean small font; dialogue 12x12 font must not be assumed."
+    },
+    {
+      "id": "NAME_FONT_BASELINE_VERTICAL_OFFSET",
+      "expected": "MUST_MATCH_OR_SAFER_DOCUMENTED_DIFFERENCE",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": "Measure top/bottom margin and baseline/anchor relative to row cell."
+    },
+    {
+      "id": "NAME_FONT_TO_DIALOGUE_SIZE_RELATION",
+      "expected": "MUST_PRESERVE_ORIGINAL_RELATION",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": "Name-entry font is visibly smaller than dialogue; candidate must preserve that relation."
+    },
+    {
       "id": "CHARACTER_GRID_GEOMETRY",
       "expected": "INTENTIONAL_KR_DIFFERENCE",
       "original": "",
@@ -48,7 +85,7 @@
       "status": "PENDING",
       "evidence_original": "",
       "evidence_candidate": "",
-      "notes": "Korean may use 4 pages/10x5, but physical cell step must be measured from the original and made safe."
+      "notes": "4 pages/10x5 logical table may differ, but physical cell pitch and cursor safety must be original-driven."
     },
     {
       "id": "CURSOR_VERTICAL_CELL_STEP",
@@ -78,7 +115,7 @@
       "status": "PENDING",
       "evidence_original": "",
       "evidence_candidate": "",
-      "notes": "Cursor center/anchor must track the selected row, not sit between rows."
+      "notes": "Cursor center/anchor must track one selected row."
     },
     {
       "id": "CURSOR_ADJACENT_ROW_OVERLAP",
@@ -88,7 +125,7 @@
       "status": "PENDING",
       "evidence_original": "",
       "evidence_candidate": "",
-      "notes": "Cursor/highlight may not cover visible pixels of the row above or below."
+      "notes": "Cursor/highlight may not cover visible pixels of row above or below."
     },
     {
       "id": "CURSOR_5ROW_SWEEP",
@@ -98,7 +135,7 @@
       "status": "PENDING",
       "evidence_original": "",
       "evidence_candidate": "",
-      "notes": "Move through rows 1..5 in every column family and verify one-row-only selection geometry."
+      "notes": "Move through rows 1..5 and verify one-row-only selection geometry."
     },
     {
       "id": "CURSOR_WRAP_HORIZONTAL",
@@ -291,24 +328,33 @@
       "notes": "No stale page/font/KMODE/source state."
     }
   ],
-  "cursor_geometry_measurement": {
+  "measurements": {
     "original": {
+      "visible_bbox_w_px": null,
+      "visible_bbox_h_px": null,
+      "top_margin_px": null,
+      "bottom_margin_px": null,
       "row_step_px": null,
       "cursor_height_px": null,
       "cursor_anchor_offset_from_target_px": null,
       "adjacent_row_overlap_px": null
     },
     "candidate": {
+      "visible_bbox_w_px": null,
+      "visible_bbox_h_px": null,
+      "top_margin_px": null,
+      "bottom_margin_px": null,
       "row_step_px": null,
       "cursor_height_px": null,
       "cursor_anchor_offset_from_target_px": null,
       "adjacent_row_overlap_px": null
-    },
-    "pass_rule": "candidate.adjacent_row_overlap_px must be 0; target alignment must be stable for all 5 rows; all differences from original require an explicit safety explanation."
+    }
   },
   "hard_fail_conditions": [
     "original comparison missing",
     "candidate evidence from different SHA",
+    "name-entry font incorrectly reuses dialogue 12x12 assumptions",
+    "name-entry font screen occupancy is materially larger than original without proof",
     "cursor overlaps visible glyph pixels of row above or below",
     "cursor sits between two rows",
     "cursor Y step differs inconsistently between rows",
@@ -317,7 +363,6 @@
     "freeze/crash",
     "name buffer overwrite",
     "saved name differs after reset/load",
-    "state leaks into following UI",
-    "intentional Korean difference not documented with safety proof"
+    "state leaks into following UI"
   ]
 }
