@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""MMR name-entry physical binding validator.
+"""MMR name-entry physical binding validator v2.
 
 Validates a recovered/constructed physical binding contract AFTER the Japanese
 original name-entry storage path has been identified.
 
-This tool intentionally does NOT assume private08, 1-byte, 2-byte, dialogue
-KS2350 IDs, or English-patch name codes.
+No encoding family is assumed: private08, 1-byte, 2-byte, dialogue KS2350 IDs,
+and English-patch codes are all non-authoritative until proven.
 
-Contract JSON must explicitly state the confirmed physical encoding/storage
-contract and map all 200 logical cells to physical code payloads.
+Two levels:
+- PASS_NAME_ENTRY_PHYSICAL_BINDING_STATIC
+  exact original-JP encoding/storage contract + 200 logical->physical mappings
+  + four physical page-table witnesses.
+- PASS_NAME_ENTRY_PHYSICAL_BINDING_FULL
+  STATIC plus runtime selection->buffer, edit semantics, and save/reset/load.
+
+Preflight may require STATIC. Release must require FULL.
 """
 from __future__ import annotations
 import argparse,json,re
@@ -27,89 +33,98 @@ def main():
     ap.add_argument('--candidate-sha256',required=True)
     ap.add_argument('-o','--out',type=Path,required=True)
     a=ap.parse_args()
-    c=load(a.contract); cand=a.candidate_sha256.lower()
-    fail=[]
+    c=load(a.contract);cand=a.candidate_sha256.lower()
+    static_fail=[]
+    runtime_fail=[]
+
     if c.get('original_rom_sha256','').lower()!=JP_SHA:
-        fail.append('ORIGINAL_ROM_SHA_MISMATCH')
+        static_fail.append('ORIGINAL_ROM_SHA_MISMATCH')
     if c.get('candidate_sha256','').lower()!=cand:
-        fail.append('CANDIDATE_SHA_MISMATCH')
+        static_fail.append('CANDIDATE_SHA_MISMATCH')
+
     enc=c.get('encoding_contract') or {}
-    required_enc=[
-      'confirmed','selection_table_encoding','name_buffer_encoding',
-      'terminator_or_length_contract','evidence'
-    ]
-    for k in required_enc:
-        if k not in enc: fail.append('MISSING_ENCODING_FIELD:'+k)
+    for k in ('confirmed','selection_table_encoding','name_buffer_encoding',
+              'terminator_or_length_contract','evidence'):
+        if k not in enc:static_fail.append('MISSING_ENCODING_FIELD:'+k)
     if enc.get('confirmed') is not True:
-        fail.append('ENCODING_CONTRACT_NOT_CONFIRMED')
+        static_fail.append('ENCODING_CONTRACT_NOT_CONFIRMED')
     if not str(enc.get('evidence') or '').strip():
-        fail.append('ENCODING_EVIDENCE_EMPTY')
+        static_fail.append('ENCODING_EVIDENCE_EMPTY')
 
     rows=c.get('mappings') or []
     if len(rows)!=200:
-        fail.append(f'MAPPING_COUNT_{len(rows)}_NOT_200')
-    logical=[]
-    chars=[]
-    payloads=[]
+        static_fail.append(f'MAPPING_COUNT_{len(rows)}_NOT_200')
+    chars=[];payloads=[]
     for n,r in enumerate(rows):
-        try: idx=int(r.get('logical_index'))
-        except: idx=-1
-        logical.append(idx)
+        try:idx=int(r.get('logical_index'))
+        except:idx=-1
         ch=str(r.get('char') or '')
-        chars.append(ch)
         ph=str(r.get('physical_code_hex') or '').strip()
-        payloads.append(ph)
-        if idx!=n:
-            fail.append(f'LOGICAL_INDEX_MISMATCH_ROW_{n}_GOT_{idx}')
+        chars.append(ch);payloads.append(ph)
+        if idx!=n:static_fail.append(f'LOGICAL_INDEX_MISMATCH_ROW_{n}_GOT_{idx}')
         if len(ch)!=1 or not ('가'<=ch<='힣'):
-            fail.append(f'INVALID_CHAR_ROW_{n}:{ch!r}')
+            static_fail.append(f'INVALID_CHAR_ROW_{n}:{ch!r}')
         if not ph or not HEX_RE.match(ph):
-            fail.append(f'INVALID_PHYSICAL_CODE_ROW_{n}:{ph!r}')
+            static_fail.append(f'INVALID_PHYSICAL_CODE_ROW_{n}:{ph!r}')
         if r.get('control_collision_checked') is not True:
-            fail.append(f'CONTROL_COLLISION_NOT_CHECKED_ROW_{n}')
+            static_fail.append(f'CONTROL_COLLISION_NOT_CHECKED_ROW_{n}')
         if r.get('roundtrip_decoded_char')!=ch:
-            fail.append(f'ROUNDTRIP_CHAR_MISMATCH_ROW_{n}')
+            static_fail.append(f'ROUNDTRIP_CHAR_MISMATCH_ROW_{n}')
 
-    if len(set(chars))!=200:
-        fail.append('LOGICAL_CHARS_NOT_UNIQUE_200')
-    if len(set(payloads))!=200:
-        fail.append('PHYSICAL_PAYLOADS_NOT_UNIQUE_200')
+    if len(set(chars))!=200:static_fail.append('LOGICAL_CHARS_NOT_UNIQUE_200')
+    if len(set(payloads))!=200:static_fail.append('PHYSICAL_PAYLOADS_NOT_UNIQUE_200')
 
     pages=c.get('pages') or []
     if len(pages)!=4:
-        fail.append('PAGE_COUNT_NOT_4')
+        static_fail.append('PAGE_COUNT_NOT_4')
     else:
         for i,p in enumerate(pages,1):
-            if p.get('page')!=i: fail.append(f'PAGE_NUMBER_BAD_{i}')
+            if p.get('page')!=i:static_fail.append(f'PAGE_NUMBER_BAD_{i}')
             ids=p.get('logical_indices') or []
             exp=list(range((i-1)*50,i*50))
-            if ids!=exp: fail.append(f'PAGE_LOGICAL_INDICES_BAD_{i}')
+            if ids!=exp:static_fail.append(f'PAGE_LOGICAL_INDICES_BAD_{i}')
             if p.get('physical_table_evidence_confirmed') is not True:
-                fail.append(f'PAGE_TABLE_EVIDENCE_NOT_CONFIRMED_{i}')
+                static_fail.append(f'PAGE_TABLE_EVIDENCE_NOT_CONFIRMED_{i}')
+            if not str(p.get('evidence') or '').strip():
+                static_fail.append(f'PAGE_TABLE_EVIDENCE_EMPTY_{i}')
 
     rt=c.get('runtime_contract') or {}
     if rt.get('selection_to_buffer_path_confirmed') is not True:
-        fail.append('SELECTION_TO_BUFFER_PATH_NOT_CONFIRMED')
+        runtime_fail.append('SELECTION_TO_BUFFER_PATH_NOT_CONFIRMED')
     if rt.get('delete_complete_cancel_semantics_confirmed') is not True:
-        fail.append('DELETE_COMPLETE_CANCEL_NOT_CONFIRMED')
+        runtime_fail.append('DELETE_COMPLETE_CANCEL_NOT_CONFIRMED')
     if rt.get('save_reset_load_roundtrip_confirmed') is not True:
-        fail.append('SAVE_RESET_LOAD_NOT_CONFIRMED')
+        runtime_fail.append('SAVE_RESET_LOAD_NOT_CONFIRMED')
+    if not str(rt.get('evidence') or '').strip():
+        runtime_fail.append('RUNTIME_EVIDENCE_EMPTY')
+
+    static_pass=not static_fail
+    full_pass=static_pass and not runtime_fail
+    if full_pass:
+        cls='PASS_NAME_ENTRY_PHYSICAL_BINDING_FULL'
+    elif static_pass:
+        cls='PASS_NAME_ENTRY_PHYSICAL_BINDING_STATIC'
+    else:
+        cls='HOLD_NAME_ENTRY_PHYSICAL_BINDING'
 
     out={
-      'schema':'MMR_NAME_ENTRY_PHYSICAL_BINDING_GATE_V1',
-      'classification':'PASS_NAME_ENTRY_PHYSICAL_BINDING' if not fail else 'HOLD_NAME_ENTRY_PHYSICAL_BINDING',
+      'schema':'MMR_NAME_ENTRY_PHYSICAL_BINDING_GATE_V2',
+      'classification':cls,
       'candidate_sha256':cand,
       'original_rom_sha256':JP_SHA,
+      'static_pass':static_pass,
+      'full_pass':full_pass,
       'mapping_count':len(rows),
       'unique_chars':len(set(chars)),
       'unique_physical_payloads':len(set(payloads)),
       'encoding_contract':enc,
-      'failures':fail,
-      'rule':'No encoding family is assumed. PASS requires a confirmed original-JP physical contract and exact 200-cell mapping.'
+      'static_failures':static_fail,
+      'runtime_failures':runtime_fail,
+      'rule':'No encoding family is assumed. Runtime-test preflight may use STATIC; release requires FULL.'
     }
     a.out.write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(out,ensure_ascii=False,indent=2))
-    raise SystemExit(0 if not fail else 2)
+    raise SystemExit(0 if static_pass else 2)
 
 if __name__=='__main__':
     main()
