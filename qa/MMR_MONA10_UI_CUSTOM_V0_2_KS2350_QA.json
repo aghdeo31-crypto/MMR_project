@@ -1,0 +1,21 @@
+{
+  "schema": "MMR_MONA10_UI_CUSTOM_V0_2_KS2350_QA",
+  "classification": "PASS_STATIC_SMALL_UI_FONT_CANDIDATE__SURFACE_MAPPING_PENDING",
+  "font_px": 10,
+  "raster_candidate": [10,12],
+  "ks2350": 2350,
+  "blank": 0,
+  "clipped": 0,
+  "duplicate_bitmap_groups": 0,
+  "regular_mean_set_pixels": 34.89531914893617,
+  "bold_mean_set_pixels": 44.111063829787234,
+  "bold_density_ratio_vs_regular": 1.2640968733232527,
+  "bold_duplicate_bitmap_groups": 1,
+  "bold_duplicate_group_sample": [["틤","팀"]],
+  "bold_decision": "REJECT_FOR_SMALL_UI_PRIMARY",
+  "custom_mean_set_pixels": 34.891063829787235,
+  "one_jamo_neighbor_counts_regular": {"1":258,"2":984,"3":1733},
+  "one_jamo_neighbor_counts_custom_v0_2": {"1":164,"2":639,"3":1583},
+  "surface_mapping": "UNRESOLVED__JP_ORIGINAL_PER_SURFACE_MEASUREMENT_REQUIRED",
+  "decision": "Mona10 Regular Custom v0.2 is the full-coverage compact candidate; use actual UI corpus to prioritize remaining close pairs."
+}
