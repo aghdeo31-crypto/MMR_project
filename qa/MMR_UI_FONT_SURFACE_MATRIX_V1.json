@@ -1,0 +1,135 @@
+{
+  "schema": "MMR_UI_FONT_SURFACE_MATRIX_V1",
+  "date_kst": "2026-09-19",
+  "classification": "INVENTORY_OPEN_ORIGINAL_MEASUREMENT_REQUIRED",
+  "release_allowed": false,
+  "font_families": {
+    "DIALOGUE_LARGE": {
+      "candidate": "MMR Mona12 Custom",
+      "base": "Mona12 Regular",
+      "native_px": 12,
+      "raster_candidate": [12,12],
+      "status": "STATIC_CANDIDATE"
+    },
+    "NAME_ENTRY_SMALL": {
+      "candidate": "MMR Mona10 Name Custom v0.2",
+      "base": "Mona10 Regular",
+      "native_px": 10,
+      "raster_candidate": [10,12],
+      "status": "STATIC_CANDIDATE_ORIGINAL_GEOMETRY_PENDING"
+    },
+    "SYSTEM_UI_SMALL_A": {
+      "candidate": null,
+      "base": null,
+      "native_px": null,
+      "raster_candidate": null,
+      "status": "OPEN_MEASURE_ORIGINAL"
+    },
+    "SYSTEM_UI_SMALL_B": {
+      "candidate": null,
+      "base": null,
+      "native_px": null,
+      "raster_candidate": null,
+      "status": "OPEN_ONLY_IF_SECOND_SMALL_CLASS_EXISTS"
+    }
+  },
+  "surfaces": [
+    {
+      "id": "MEMORY_CENTER_NOTICE",
+      "priority": "P0",
+      "original_font_class": null,
+      "candidate_font_class": null,
+      "original_visible_height_px": null,
+      "candidate_visible_height_px": null,
+      "renderer_or_state_route": null,
+      "status": "PENDING_ORIGINAL_COMPARE"
+    },
+    {
+      "id": "RECORD_SELECTION",
+      "priority": "P0",
+      "original_font_class": null,
+      "candidate_font_class": null,
+      "original_visible_height_px": null,
+      "candidate_visible_height_px": null,
+      "renderer_or_state_route": null,
+      "status": "PENDING_ORIGINAL_COMPARE"
+    },
+    {
+      "id": "NAME_ENTRY",
+      "priority": "P0_FATAL",
+      "original_font_class": "SMALLER_THAN_DIALOGUE_OBSERVED",
+      "candidate_font_class": "NAME_ENTRY_SMALL",
+      "original_visible_height_px": null,
+      "candidate_visible_height_px": "Mona10 current logical set mostly 8..9",
+      "renderer_or_state_route": null,
+      "status": "STATIC_FONT_READY_GEOMETRY_PENDING"
+    },
+    {
+      "id": "MAIN_MENU",
+      "priority": "P0",
+      "original_font_class": null,
+      "candidate_font_class": null,
+      "original_visible_height_px": null,
+      "candidate_visible_height_px": null,
+      "renderer_or_state_route": null,
+      "status": "PENDING_ORIGINAL_COMPARE"
+    },
+    {
+      "id": "ITEM_EQUIPMENT_STATUS",
+      "priority": "P0",
+      "original_font_class": null,
+      "candidate_font_class": null,
+      "original_visible_height_px": null,
+      "candidate_visible_height_px": null,
+      "renderer_or_state_route": null,
+      "status": "PENDING_ORIGINAL_COMPARE"
+    },
+    {
+      "id": "SHOP_SERVICE_UI",
+      "priority": "P0",
+      "original_font_class": null,
+      "candidate_font_class": null,
+      "original_visible_height_px": null,
+      "candidate_visible_height_px": null,
+      "renderer_or_state_route": null,
+      "status": "PENDING_ORIGINAL_COMPARE"
+    },
+    {
+      "id": "BATTLE_UI",
+      "priority": "P0",
+      "original_font_class": null,
+      "candidate_font_class": null,
+      "original_visible_height_px": null,
+      "candidate_visible_height_px": null,
+      "renderer_or_state_route": null,
+      "status": "PENDING_ORIGINAL_COMPARE"
+    },
+    {
+      "id": "SAVE_LOAD_UI",
+      "priority": "P0",
+      "original_font_class": null,
+      "candidate_font_class": null,
+      "original_visible_height_px": null,
+      "candidate_visible_height_px": null,
+      "renderer_or_state_route": null,
+      "status": "PENDING_ORIGINAL_COMPARE"
+    },
+    {
+      "id": "FIELD_DIALOGUE",
+      "priority": "P1",
+      "original_font_class": "DIALOGUE_LARGE",
+      "candidate_font_class": "DIALOGUE_LARGE",
+      "original_visible_height_px": null,
+      "candidate_visible_height_px": null,
+      "renderer_or_state_route": null,
+      "status": "MONA12_STATIC_CANDIDATE_RUNTIME_PENDING"
+    }
+  ],
+  "rules": [
+    "Do not assign a UI surface to Mona10/Mona12/8x12 by appearance alone.",
+    "Measure original Japanese visible glyph height, baseline/row pitch, and renderer/state route first.",
+    "Do not geometrically shrink dialogue Mona12 for small UI.",
+    "One small-font family may be reused only after original surfaces are proven to share the same physical contract.",
+    "P0 surfaces must all be classified and runtime-tested before release."
+  ]
+}
