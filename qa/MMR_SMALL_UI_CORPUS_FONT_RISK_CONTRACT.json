@@ -1,0 +1,16 @@
+{
+  "schema": "MMR_SMALL_UI_CORPUS_FONT_RISK_CONTRACT_V1",
+  "classification": "READY_FOR_REAL_P0_UI_TEXT_LEDGER",
+  "required_surfaces": [
+    "MEMORY_CENTER_NOTICE",
+    "RECORD_SELECTION",
+    "MAIN_MENU",
+    "ITEM_EQUIPMENT_STATUS",
+    "SHOP_SERVICE_UI",
+    "BATTLE_UI",
+    "SAVE_LOAD_UI"
+  ],
+  "candidate": "MMR Mona10 UI Custom v0.2",
+  "rule": "Do not invent P0 UI strings. Populate the ledger only from exact project/runtime evidence, then prioritize same-surface close glyph pairs.",
+  "release_effect": "small_font_family_complete remains false until all P0 surfaces are classified, actual corpus risk pairs are reviewed, and runtime captures pass."
+}
