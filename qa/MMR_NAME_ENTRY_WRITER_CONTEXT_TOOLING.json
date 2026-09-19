@@ -1,0 +1,8 @@
+{
+  "schema": "MMR_NAME_ENTRY_WRITER_CONTEXT_TOOLING_V1",
+  "classification": "STATIC_TOOLING_READY",
+  "requires": "NAME_ENTRY_WRITE_PC_CANDIDATES",
+  "captures": ["CPU state","48-byte code window","two stack interpretations","direct-page neighborhood"],
+  "writes_memory": false,
+  "authority_after_success": "writer context only; name semantics still unproven"
+}
