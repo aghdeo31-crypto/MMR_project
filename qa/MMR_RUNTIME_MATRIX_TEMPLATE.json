@@ -1,0 +1,20 @@
+{
+  "schema": "MMR_RUNTIME_MATRIX_V1",
+  "candidate_sha256": "",
+  "classification": "PENDING",
+  "paths": [
+    {"id":"BOOT_TITLE","status":"PENDING","capture":"","notes":""},
+    {"id":"MEMORY_CENTER_NOTICE","status":"PENDING","capture":"","notes":""},
+    {"id":"RECORD_SELECTION","status":"PENDING","capture":"","notes":"must not freeze"},
+    {"id":"NEW_GAME","status":"PENDING","capture":"","notes":""},
+    {"id":"NAME_INPUT_4P_SAVE","status":"PENDING","capture":"","notes":""},
+    {"id":"FIELD_DIALOGUE","status":"PENDING","capture":"","notes":""},
+    {"id":"SHOP_SERVICE_DIALOGUE","status":"PENDING","capture":"","notes":""},
+    {"id":"ITEM_EQUIP_STATUS_UI","status":"PENDING","capture":"","notes":""},
+    {"id":"BATTLE_TEXT","status":"PENDING","capture":"","notes":""},
+    {"id":"SAVE_RESET_LOAD","status":"PENDING","capture":"","notes":""},
+    {"id":"LONG_DIALOGUE_TRANSITIONS","status":"PENDING","capture":"","notes":""},
+    {"id":"SMALL_FONT_UI_SURFACES","status":"PENDING","capture":"","notes":""}
+  ],
+  "hard_rule": "Every PASS must come from this exact candidate SHA. Evidence from another title/build is invalid."
+}
