@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""MMR name-entry original-vs-candidate geometry comparator v2.
+"""MMR name-entry original-vs-candidate geometry comparator v3.
 
 Input:
   original/row1.png ... row5.png
@@ -14,24 +14,37 @@ cursor/highlight in each capture by diffing against that median, measures
 cursor bbox/center/Y-step, estimates visible text-row bboxes, and checks
 adjacent-row overlap plus original-vs-candidate geometry.
 
+Evidence binding:
+- exact Japanese ROM SHA256 is pinned and validated;
+- candidate ROM SHA256 is mandatory;
+- every PNG capture SHA256 is recorded in the report.
+
 No OCR. No ROM/emulator writes.
 """
 from __future__ import annotations
-import argparse,json,statistics
+import argparse,hashlib,json,statistics
 from pathlib import Path
 from PIL import Image
 
 ROWS=5
+JP_SHA256="6a68e1806d8d72accb4a5218330210e178880216863c1c38b8865032c5c28724"
+
+def sha256_file(p:Path)->str:
+    h=hashlib.sha256()
+    with p.open("rb") as f:
+        for b in iter(lambda:f.read(1<<20),b""):h.update(b)
+    return h.hexdigest()
 
 def load_set(d:Path):
-    imgs=[]
+    imgs=[];evidence=[]
     for i in range(1,ROWS+1):
         p=d/f"row{i}.png"
         if not p.is_file():raise FileNotFoundError(p)
         imgs.append(Image.open(p).convert("RGB"))
+        evidence.append({"file":p.name,"sha256":sha256_file(p)})
     size=imgs[0].size
     if any(im.size!=size for im in imgs):raise ValueError(f"capture size mismatch in {d}")
-    return imgs
+    return imgs,evidence
 
 def median_rgb(images):
     w,h=images[0].size
@@ -122,6 +135,8 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--original",type=Path,required=True)
     ap.add_argument("--candidate",type=Path,required=True)
+    ap.add_argument("--original-rom-sha256",default=JP_SHA256)
+    ap.add_argument("--candidate-sha256",required=True)
     ap.add_argument("--crop",required=True,help="X,Y,W,H")
     ap.add_argument("--cursor-threshold",type=int,default=24)
     ap.add_argument("--fg-threshold",type=int,default=18)
@@ -130,9 +145,14 @@ def main():
     ap.add_argument("--font-height-tolerance",type=float,default=2.0)
     ap.add_argument("--out",type=Path,required=True)
     a=ap.parse_args()
+    if a.original_rom_sha256.lower()!=JP_SHA256:
+        raise SystemExit("REFUSED: original ROM SHA256 is not exact Japanese authority")
+    cand=a.candidate_sha256.lower()
+    if len(cand)!=64 or any(c not in "0123456789abcdef" for c in cand):
+        raise SystemExit("REFUSED: invalid candidate SHA256")
     crop=tuple(int(x,0) for x in a.crop.split(","))
     if len(crop)!=4 or crop[2]<=0 or crop[3]<=0:raise SystemExit("bad --crop X,Y,W,H")
-    oi=load_set(a.original);ci=load_set(a.candidate)
+    oi,oe=load_set(a.original);ci,ce=load_set(a.candidate)
     if oi[0].size!=ci[0].size:raise SystemExit("original/candidate screenshot dimensions differ")
     o=analyze(oi,crop,a.cursor_threshold,a.fg_threshold)
     c=analyze(ci,crop,a.cursor_threshold,a.fg_threshold)
@@ -150,13 +170,17 @@ def main():
     }
     passed=all(checks.values())
     report={
-      "schema":"MMR_NAME_ENTRY_GEOMETRY_COMPARE_V2_AUTO_CAPTURE",
+      "schema":"MMR_NAME_ENTRY_GEOMETRY_COMPARE_V3_CAPTURE_SHA_BOUND",
       "classification":"PASS_NAME_ENTRY_GEOMETRY" if passed else "FAIL_NAME_ENTRY_GEOMETRY",
+      "original_rom_sha256":JP_SHA256,
+      "candidate_sha256":cand,
+      "capture_evidence":{"original":oe,"candidate":ce},
+      "capture_dimensions":list(oi[0].size),
       "crop_xywh":crop,
       "thresholds":{"cursor":a.cursor_threshold,"foreground":a.fg_threshold},
       "tolerances":{"row_step_px":a.row_step_tolerance,"cursor_height_px":a.cursor_height_tolerance,"font_visible_height_px":a.font_height_tolerance},
       "original":o,"candidate":c,"checks":checks,
-      "hard_rule":"Candidate adjacent-row overlap must be 0 px. Five captures must be same page/state and evidence must belong to one exact candidate SHA."
+      "hard_rule":"Candidate adjacent-row overlap must be 0 px. Five captures must be same page/state. Report is bound to exact candidate SHA and exact Japanese original ROM SHA."
     }
     (a.out/"MMR_NAME_ENTRY_GEOMETRY_COMPARE.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
     print(json.dumps(report,ensure_ascii=False,indent=2))
