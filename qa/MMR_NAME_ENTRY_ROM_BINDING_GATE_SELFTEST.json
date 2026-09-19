@@ -1,0 +1,11 @@
+{
+  "schema": "MMR_NAME_ENTRY_ROM_BINDING_GATE_SELFTEST_V1",
+  "classification": "PASS",
+  "synthetic_rom_bytes": 2097152,
+  "page_offsets": ["0x010000","0x018000","0x020000","0x028000"],
+  "page_hit_counts": [1,1,1,1],
+  "all_pages_have_one_exact_hit": true,
+  "concatenated_600_hit_count": 0,
+  "expected_result": "PASS_NAME_ENTRY_ROM_BINDING_EXACT",
+  "note": "Synthetic static selftest only. Runtime page selection is not promoted."
+}
