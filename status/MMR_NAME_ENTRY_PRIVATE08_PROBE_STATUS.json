@@ -1,0 +1,16 @@
+{
+  "schema": "MMR_NAME_ENTRY_PRIVATE08_PROBE_STATUS_V1",
+  "classification": "PROBE_ONLY_NOT_AUTHORITY",
+  "tool": "tools/mmr_name_entry_rom_binding_gate.py",
+  "reason": "The historical MMR name-entry handoff explicitly leaves physical code width, name table encoding, buffer format, terminator and save format unresolved. Dialogue private08 encoding must not be assumed to be name-entry encoding.",
+  "allowed_use": [
+    "Search for a possible private08-form 4-page table as reconnaissance.",
+    "If it matches, treat the hit as a candidate requiring independent original-JP code-path confirmation."
+  ],
+  "forbidden_use": [
+    "Do not fail a valid build solely because private08 page payloads are absent.",
+    "Do not promote private08 as name-entry authority without physical path evidence.",
+    "Do not use dialogue KS2350 IDs as name-buffer codes by assumption."
+  ],
+  "replacement_release_gate": "tools/mmr_name_entry_physical_binding_gate.py"
+}
