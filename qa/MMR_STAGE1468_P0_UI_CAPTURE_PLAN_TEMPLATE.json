@@ -1,0 +1,49 @@
+{
+  "schema": "MMR_STAGE1468_P0_UI_CAPTURE_PLAN_V1",
+  "candidate_sha256": "",
+  "surfaces": [
+    {
+      "id": "MEMORY_CENTER_NOTICE",
+      "original_png": "captures/ui/jp/MEMORY_CENTER_NOTICE.png",
+      "candidate_png": "captures/ui/kr/MEMORY_CENTER_NOTICE.png",
+      "manifest_json": "captures/ui/manifests/MEMORY_CENTER_NOTICE.json"
+    },
+    {
+      "id": "RECORD_SELECTION",
+      "original_png": "captures/ui/jp/RECORD_SELECTION.png",
+      "candidate_png": "captures/ui/kr/RECORD_SELECTION.png",
+      "manifest_json": "captures/ui/manifests/RECORD_SELECTION.json"
+    },
+    {
+      "id": "MAIN_MENU",
+      "original_png": "captures/ui/jp/MAIN_MENU.png",
+      "candidate_png": "captures/ui/kr/MAIN_MENU.png",
+      "manifest_json": "captures/ui/manifests/MAIN_MENU.json"
+    },
+    {
+      "id": "ITEM_EQUIPMENT_STATUS",
+      "original_png": "captures/ui/jp/ITEM_EQUIPMENT_STATUS.png",
+      "candidate_png": "captures/ui/kr/ITEM_EQUIPMENT_STATUS.png",
+      "manifest_json": "captures/ui/manifests/ITEM_EQUIPMENT_STATUS.json"
+    },
+    {
+      "id": "SHOP_SERVICE_UI",
+      "original_png": "captures/ui/jp/SHOP_SERVICE_UI.png",
+      "candidate_png": "captures/ui/kr/SHOP_SERVICE_UI.png",
+      "manifest_json": "captures/ui/manifests/SHOP_SERVICE_UI.json"
+    },
+    {
+      "id": "BATTLE_UI",
+      "original_png": "captures/ui/jp/BATTLE_UI.png",
+      "candidate_png": "captures/ui/kr/BATTLE_UI.png",
+      "manifest_json": "captures/ui/manifests/BATTLE_UI.json"
+    },
+    {
+      "id": "SAVE_LOAD_UI",
+      "original_png": "captures/ui/jp/SAVE_LOAD_UI.png",
+      "candidate_png": "captures/ui/kr/SAVE_LOAD_UI.png",
+      "manifest_json": "captures/ui/manifests/SAVE_LOAD_UI.json"
+    }
+  ],
+  "rule": "All seven P0 fixed UI surfaces are mandatory before system/UI preflight PASS."
+}
