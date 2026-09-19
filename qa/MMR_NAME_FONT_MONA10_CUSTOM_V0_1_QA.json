@@ -1,0 +1,29 @@
+{
+  "schema": "MMR_NAME_FONT_MONA10_CUSTOM_V0_1_QA",
+  "base_font": "Mona10.ttf",
+  "base_font_sha256": "45f2ce689bea362c1880b7ed0de61313b1ac8abd2c734c81c2a55d7022edfe90",
+  "font_px": 10,
+  "glyph_cell": [10,12],
+  "y_offset": 0,
+  "horizontal_alignment": "centered",
+  "geometric_scaling": false,
+  "name_glyphs": 200,
+  "blank": 0,
+  "clipped": 0,
+  "duplicate_bitmap_groups": 0,
+  "bbox_width_counts": {"8":60,"9":140},
+  "bbox_height_counts": {"8":24,"9":176},
+  "mean_set_pixels": 31.865,
+  "custom_rule": "Jungseong EU dominant horizontal run >=8: trim 1 pixel each end",
+  "changed_glyphs": ["은","근","승","플","흑","늑"],
+  "confusable_pairs_base": {"distance_le_1":1,"distance_le_2":19,"distance_le_3":33},
+  "confusable_pairs_custom": {"distance_le_1":0,"distance_le_2":17,"distance_le_3":32},
+  "distance_le_2_pairs": [
+    ["김","검"],["조","즈"],["서","시"],["신","선"],["전","진"],
+    ["민","먼"],["지","저"],["현","헌"],["도","드"],["기","거"],
+    ["로","토"],["로","르"],["소","스"],["프","포"],["비","버"],
+    ["트","토"],["트","르"]
+  ],
+  "cursor_geometry": "UNRESOLVED__MUST_MEASURE_JP_ORIGINAL",
+  "classification": "PASS_STATIC_NAME_FONT_CANDIDATE__ORIGINAL_GEOMETRY_REQUIRED"
+}
