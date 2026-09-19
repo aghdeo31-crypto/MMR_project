@@ -1,5 +1,5 @@
 {
-  "schema": "MMR_NAME_ENTRY_ORIGINAL_COMPARE_V1",
+  "schema": "MMR_NAME_ENTRY_ORIGINAL_COMPARE_V2_CURSOR_GEOMETRY",
   "original_rom": {
     "name": "Metal Max Returns (Japan).sfc",
     "size": 4194304,
@@ -8,35 +8,310 @@
   },
   "candidate_sha256": "",
   "classification": "PENDING",
-  "rule": "No NAME_ENTRY PASS without original-JP comparison on every behavior marked MUST_MATCH or INTENTIONAL_KR_DIFFERENCE.",
+  "rule": "No NAME_ENTRY PASS without original-JP comparison. Cursor must align to exactly one target row and must not overlap visible glyph pixels of adjacent rows.",
   "comparisons": [
-    {"id":"ENTRY_ROUTE","expected":"MUST_MATCH","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"INITIAL_CURSOR_POSITION","expected":"MUST_MATCH","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"INITIAL_NAME_BUFFER_STATE","expected":"MUST_MATCH","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"CHARACTER_GRID_GEOMETRY","expected":"INTENTIONAL_KR_DIFFERENCE","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":"Korean may use 4 pages/10x5, but cell step/cursor logic must remain safe and explicitly documented"},
-    {"id":"CURSOR_WRAP_HORIZONTAL","expected":"MUST_MATCH_OR_DOCUMENT","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"CURSOR_WRAP_VERTICAL","expected":"MUST_MATCH_OR_DOCUMENT","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"PAGE_CHANGE_INPUT","expected":"INTENTIONAL_KR_DIFFERENCE","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":"If L/R paging is added, prove it does not alter original name buffer semantics"},
-    {"id":"PAGE_CHANGE_CURSOR_STATE","expected":"MUST_MATCH_OR_DOCUMENT","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"A_INSERT","expected":"MUST_MATCH","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"B_DELETE","expected":"MUST_MATCH","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"CANCEL_BEHAVIOR","expected":"MUST_MATCH","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"COMPLETE_BEHAVIOR","expected":"MUST_MATCH","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"EMPTY_NAME_BEHAVIOR","expected":"MUST_MATCH","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"MAX_NAME_LENGTH","expected":"MUST_MATCH_UNLESS_STRUCTURALLY_PROVEN","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"OVER_LIMIT_INPUT","expected":"MUST_MATCH","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"CHARACTER_CODE_WIDTH","expected":"MUST_MATCH_STORAGE_CONTRACT_OR_PROVEN_EXTENSION","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"TERMINATOR_SPACE_EMPTY_ENCODING","expected":"MUST_MATCH","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"SAVE_DATA_BYTES","expected":"MUST_MATCH_CONTRACT_OR_PROVEN_EXTENSION","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"SAVE_RESET_LOAD_NAME","expected":"MUST_MATCH","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"NAME_DISPLAY_STATUS_MENU","expected":"MUST_MATCH_BEHAVIOR","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"NAME_DISPLAY_DIALOGUE","expected":"MUST_MATCH_BEHAVIOR","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"NAME_DISPLAY_BATTLE_RESULT","expected":"MUST_MATCH_BEHAVIOR","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":""},
-    {"id":"STATE_AFTER_EXIT","expected":"MUST_MATCH","original":"","candidate":"","status":"PENDING","evidence_original":"","evidence_candidate":"","notes":"No stale page/font/KMODE/source state"}
+    {
+      "id": "ENTRY_ROUTE",
+      "expected": "MUST_MATCH",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "INITIAL_CURSOR_POSITION",
+      "expected": "MUST_MATCH",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "INITIAL_NAME_BUFFER_STATE",
+      "expected": "MUST_MATCH",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "CHARACTER_GRID_GEOMETRY",
+      "expected": "INTENTIONAL_KR_DIFFERENCE",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": "Korean may use 4 pages/10x5, but physical cell step must be measured from the original and made safe."
+    },
+    {
+      "id": "CURSOR_VERTICAL_CELL_STEP",
+      "expected": "MUST_MATCH_OR_SAFER_DOCUMENTED_DIFFERENCE",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": "Measure original row-to-row cursor Y delta and candidate delta."
+    },
+    {
+      "id": "CURSOR_BOX_HEIGHT",
+      "expected": "MUST_MATCH_OR_SAFER_DOCUMENTED_DIFFERENCE",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": "Measure actual cursor/highlight vertical extent."
+    },
+    {
+      "id": "CURSOR_TARGET_VERTICAL_ALIGNMENT",
+      "expected": "MUST_MATCH_OR_DOCUMENT",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": "Cursor center/anchor must track the selected row, not sit between rows."
+    },
+    {
+      "id": "CURSOR_ADJACENT_ROW_OVERLAP",
+      "expected": "MUST_BE_ZERO",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": "Cursor/highlight may not cover visible pixels of the row above or below."
+    },
+    {
+      "id": "CURSOR_5ROW_SWEEP",
+      "expected": "MUST_PASS",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": "Move through rows 1..5 in every column family and verify one-row-only selection geometry."
+    },
+    {
+      "id": "CURSOR_WRAP_HORIZONTAL",
+      "expected": "MUST_MATCH_OR_DOCUMENT",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "CURSOR_WRAP_VERTICAL",
+      "expected": "MUST_MATCH_OR_DOCUMENT",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "PAGE_CHANGE_INPUT",
+      "expected": "INTENTIONAL_KR_DIFFERENCE",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": "If L/R paging is added, prove it does not alter original name buffer semantics."
+    },
+    {
+      "id": "PAGE_CHANGE_CURSOR_STATE",
+      "expected": "MUST_MATCH_OR_DOCUMENT",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "A_INSERT",
+      "expected": "MUST_MATCH",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "B_DELETE",
+      "expected": "MUST_MATCH",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "CANCEL_BEHAVIOR",
+      "expected": "MUST_MATCH",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "COMPLETE_BEHAVIOR",
+      "expected": "MUST_MATCH",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "EMPTY_NAME_BEHAVIOR",
+      "expected": "MUST_MATCH",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "MAX_NAME_LENGTH",
+      "expected": "MUST_MATCH_UNLESS_STRUCTURALLY_PROVEN",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "OVER_LIMIT_INPUT",
+      "expected": "MUST_MATCH",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "CHARACTER_CODE_WIDTH",
+      "expected": "MUST_MATCH_STORAGE_CONTRACT_OR_PROVEN_EXTENSION",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "TERMINATOR_SPACE_EMPTY_ENCODING",
+      "expected": "MUST_MATCH",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "SAVE_DATA_BYTES",
+      "expected": "MUST_MATCH_CONTRACT_OR_PROVEN_EXTENSION",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "SAVE_RESET_LOAD_NAME",
+      "expected": "MUST_MATCH",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "NAME_DISPLAY_STATUS_MENU",
+      "expected": "MUST_MATCH_BEHAVIOR",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "NAME_DISPLAY_DIALOGUE",
+      "expected": "MUST_MATCH_BEHAVIOR",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "NAME_DISPLAY_BATTLE_RESULT",
+      "expected": "MUST_MATCH_BEHAVIOR",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": ""
+    },
+    {
+      "id": "STATE_AFTER_EXIT",
+      "expected": "MUST_MATCH",
+      "original": "",
+      "candidate": "",
+      "status": "PENDING",
+      "evidence_original": "",
+      "evidence_candidate": "",
+      "notes": "No stale page/font/KMODE/source state."
+    }
   ],
+  "cursor_geometry_measurement": {
+    "original": {
+      "row_step_px": null,
+      "cursor_height_px": null,
+      "cursor_anchor_offset_from_target_px": null,
+      "adjacent_row_overlap_px": null
+    },
+    "candidate": {
+      "row_step_px": null,
+      "cursor_height_px": null,
+      "cursor_anchor_offset_from_target_px": null,
+      "adjacent_row_overlap_px": null
+    },
+    "pass_rule": "candidate.adjacent_row_overlap_px must be 0; target alignment must be stable for all 5 rows; all differences from original require an explicit safety explanation."
+  },
   "hard_fail_conditions": [
     "original comparison missing",
     "candidate evidence from different SHA",
+    "cursor overlaps visible glyph pixels of row above or below",
+    "cursor sits between two rows",
+    "cursor Y step differs inconsistently between rows",
     "wrong selected glyph",
     "cursor escapes valid grid",
     "freeze/crash",
