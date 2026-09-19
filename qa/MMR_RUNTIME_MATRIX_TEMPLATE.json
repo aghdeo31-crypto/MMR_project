@@ -1,43 +1,273 @@
 {
-  "schema": "MMR_RUNTIME_MATRIX_V2_SYSTEM_UI_FIRST",
+  "schema": "MMR_RUNTIME_MATRIX_V3_NAME_CURSOR_CRITICAL",
   "candidate_sha256": "",
   "classification": "PENDING",
   "priority": "SYSTEM_UI_NAME_ENTRY_FIRST",
   "paths": [
-    {"id":"BOOT_TITLE","class":"SYSTEM","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"MEMORY_CENTER_NOTICE","class":"SYSTEM","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"RECORD_SELECTION","class":"SYSTEM","critical":true,"status":"PENDING","capture":"","notes":"must not freeze"},
-    {"id":"NEW_GAME_ROUTE","class":"SYSTEM","critical":true,"status":"PENDING","capture":"","notes":""},
-
-    {"id":"NAME_ENTRY_ENTER","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"NAME_ENTRY_INITIAL_STATE","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":"default/initial contents and cursor state"},
-    {"id":"NAME_ENTRY_PAGE_1","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"NAME_ENTRY_PAGE_2","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"NAME_ENTRY_PAGE_3","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"NAME_ENTRY_PAGE_4","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"NAME_ENTRY_PAGE_CYCLE_1_2_3_4_1","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":"repeat multiple cycles; no stale page/source bank"},
-    {"id":"NAME_ENTRY_CURSOR_ALL_EDGES","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":"top/bottom/left/right/corners"},
-    {"id":"NAME_ENTRY_VISIBLE_GLYPH_IDENTITY","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":"selected glyph must equal displayed glyph"},
-    {"id":"NAME_ENTRY_INSERT_DELETE_CANCEL","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"NAME_ENTRY_MAX_LENGTH","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":"no buffer overrun at limit"},
-    {"id":"NAME_ENTRY_CONFIRM_AFTER_PAGE_SWITCH","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"NAME_ENTRY_SAVE_COMMIT","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"NAME_ENTRY_EXIT_TO_GAME","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":"no KMODE/page/source-state leakage"},
-    {"id":"NAME_ENTRY_SAVE_RESET_LOAD","class":"NAME_ENTRY","critical":true,"status":"PENDING","capture":"","notes":"committed name must survive and render correctly"},
-
-    {"id":"SYSTEM_PROMPTS","class":"UI","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"MENU_OPEN_CLOSE_REPEAT","class":"UI","critical":true,"status":"PENDING","capture":"","notes":"repeat cycles"},
-    {"id":"ITEM_EQUIP_STATUS_UI","class":"UI","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"SHOP_SERVICE_UI","class":"UI","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"BATTLE_UI_TEXT","class":"UI","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"SAVE_UI","class":"UI","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"LOAD_UI","class":"UI","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"SMALL_FONT_UI_SURFACES","class":"UI","critical":true,"status":"PENDING","capture":"","notes":""},
-    {"id":"UI_FAMILY_TRANSITIONS","class":"UI","critical":true,"status":"PENDING","capture":"","notes":"no stale font mode/palette/state"},
-
-    {"id":"FIELD_DIALOGUE","class":"DIALOGUE","critical":false,"status":"PENDING","capture":"","notes":""},
-    {"id":"SHOP_SERVICE_DIALOGUE","class":"DIALOGUE","critical":false,"status":"PENDING","capture":"","notes":""},
-    {"id":"LONG_DIALOGUE_TRANSITIONS","class":"DIALOGUE","critical":false,"status":"PENDING","capture":"","notes":""}
+    {
+      "id": "BOOT_TITLE",
+      "class": "SYSTEM",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "MEMORY_CENTER_NOTICE",
+      "class": "SYSTEM",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "RECORD_SELECTION",
+      "class": "SYSTEM",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "must not freeze"
+    },
+    {
+      "id": "NEW_GAME_ROUTE",
+      "class": "SYSTEM",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "NAME_ENTRY_ENTER",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "NAME_ENTRY_INITIAL_STATE",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "default/initial contents and cursor state"
+    },
+    {
+      "id": "NAME_ENTRY_PAGE_1",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "NAME_ENTRY_PAGE_2",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "NAME_ENTRY_PAGE_3",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "NAME_ENTRY_PAGE_4",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "NAME_ENTRY_PAGE_CYCLE_1_2_3_4_1",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "repeat multiple cycles; no stale page/source bank"
+    },
+    {
+      "id": "NAME_ENTRY_CURSOR_VERTICAL_GEOMETRY",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "compare original JP row step/cursor extent; adjacent-row overlap must be 0"
+    },
+    {
+      "id": "NAME_ENTRY_CURSOR_5ROW_SWEEP",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "cursor must align to exactly one row for all five rows"
+    },
+    {
+      "id": "NAME_ENTRY_CURSOR_ALL_EDGES",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "top/bottom/left/right/corners"
+    },
+    {
+      "id": "NAME_ENTRY_VISIBLE_GLYPH_IDENTITY",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "selected glyph must equal displayed glyph"
+    },
+    {
+      "id": "NAME_ENTRY_INSERT_DELETE_CANCEL",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "NAME_ENTRY_MAX_LENGTH",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "no buffer overrun at limit"
+    },
+    {
+      "id": "NAME_ENTRY_CONFIRM_AFTER_PAGE_SWITCH",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "NAME_ENTRY_SAVE_COMMIT",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "NAME_ENTRY_EXIT_TO_GAME",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "no KMODE/page/source-state leakage"
+    },
+    {
+      "id": "NAME_ENTRY_SAVE_RESET_LOAD",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "committed name must survive and render correctly"
+    },
+    {
+      "id": "SYSTEM_PROMPTS",
+      "class": "UI",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "MENU_OPEN_CLOSE_REPEAT",
+      "class": "UI",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "repeat cycles"
+    },
+    {
+      "id": "ITEM_EQUIP_STATUS_UI",
+      "class": "UI",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "SHOP_SERVICE_UI",
+      "class": "UI",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "BATTLE_UI_TEXT",
+      "class": "UI",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "SAVE_UI",
+      "class": "UI",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "LOAD_UI",
+      "class": "UI",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "SMALL_FONT_UI_SURFACES",
+      "class": "UI",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "UI_FAMILY_TRANSITIONS",
+      "class": "UI",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "no stale font mode/palette/state"
+    },
+    {
+      "id": "FIELD_DIALOGUE",
+      "class": "DIALOGUE",
+      "critical": false,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "SHOP_SERVICE_DIALOGUE",
+      "class": "DIALOGUE",
+      "critical": false,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    },
+    {
+      "id": "LONG_DIALOGUE_TRANSITIONS",
+      "class": "DIALOGUE",
+      "critical": false,
+      "status": "PENDING",
+      "capture": "",
+      "notes": ""
+    }
   ],
-  "hard_rule": "All critical SYSTEM/UI/NAME_ENTRY paths must PASS on this exact candidate SHA before dialogue/font-art polish can be considered release-ready."
+  "hard_rule": "All critical SYSTEM/UI/NAME_ENTRY paths must PASS on the exact candidate SHA. Cursor overlap with adjacent name-entry rows is an automatic hard FAIL."
 }
