@@ -1,0 +1,39 @@
+{
+  "schema": "MMR_THIRD_ATTEMPT_RELEASE_BLOCKERS_V1",
+  "date_kst": "2026-09-19",
+  "release_allowed": false,
+  "classification": "HOLD_UNTIL_ALL_GATES_PASS",
+  "reason": "Two previous distribution attempts failed; third attempt uses fail-closed quality gates.",
+  "current_parent": {
+    "stage": 1467,
+    "rom": "Metal_Max_Returns_Korean_RC2_TEST_20260918.sfc",
+    "sha256": "29EBF0A5DAB0A646FF9AF6E68127AAE6C8182AB2129C2819FB37177A94453BEB"
+  },
+  "gates": {
+    "G0_exact_parent": "READY_TO_RUN_LOCAL",
+    "G1_glyph_identity": "TO_RUN_ON_REAL_TRANSLATION_AND_ENCODED_STREAM",
+    "G2_font_structure": "MONA12_STATIC_PASS",
+    "G3_font_art": "REVIEW_REQUIRED",
+    "G4_small_font_family": "OPEN",
+    "G5_japanese_original_translation": "IN_PROGRESS",
+    "G6_static_binary_regression": "READY_TO_RUN_LOCAL",
+    "G7_runtime_matrix": "NOT_RUN_FOR_STAGE1468",
+    "G8_language_art_sweep": "OPEN"
+  },
+  "confirmed_mona12": {
+    "ks2350_blank": 0,
+    "ks2350_clipped": 0,
+    "duplicate_bitmap_groups": 0,
+    "sentinel_hamming": {
+      "한_힌": 39,
+      "한_이": 60,
+      "이_히": 15,
+      "개_게": 3,
+      "애_에": 3,
+      "독_득": 1,
+      "눅_늑": 1
+    }
+  },
+  "hard_rule": "No RC/final/package promotion until all gates are PASS on the same candidate SHA.",
+  "new_real": false
+}
