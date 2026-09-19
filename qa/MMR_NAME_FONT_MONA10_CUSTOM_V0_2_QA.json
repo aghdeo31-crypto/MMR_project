@@ -1,0 +1,28 @@
+{
+  "schema": "MMR_NAME_FONT_MONA10_CUSTOM_V0_2_QA",
+  "classification": "PASS_STATIC_NAME_FONT_CANDIDATE__2_VISUAL_PAIRS_REVIEWED_SEPARATELY__ORIGINAL_GEOMETRY_REQUIRED",
+  "base_font": "Mona10.ttf",
+  "base_font_sha256": "45f2ce689bea362c1880b7ed0de61313b1ac8abd2c734c81c2a55d7022edfe90",
+  "font_px": 10,
+  "glyph_cell": [10,12],
+  "geometric_scaling": false,
+  "logical_chars": 200,
+  "blank": 0,
+  "clipped": 0,
+  "duplicate_bitmap_groups": 0,
+  "v0_1_distance_le_2": 17,
+  "v0_2_distance_le_1": 0,
+  "v0_2_distance_le_2": 2,
+  "remaining_distance_le_2": [
+    {"a":"로","b":"토","distance":2,"disposition":"VISUALLY_DISTINCT_INITIAL_JAMO__KEEP_BASE_SHAPE"},
+    {"a":"트","b":"르","distance":2,"disposition":"VISUALLY_DISTINCT_INITIAL_JAMO__KEEP_BASE_SHAPE"}
+  ],
+  "art_rules": [
+    "ㅓ vs ㅣ: only when base distance <=2, extend the ㅓ arm by one pixel toward the consonant side",
+    "ㅡ vs ㅗ: only when base distance <=2, trim the shared ㅡ bar symmetrically below the ㅗ stem",
+    "ㅕ vs ㅓ: only when base distance <=2, strengthen the lower ㅕ arm by one pixel"
+  ],
+  "important_correction": "v0.1 broad EU trim is superseded because it could target a non-medial horizontal run depending on syllable layout. v0.2 uses counterpart-aware component location.",
+  "cursor_geometry": "UNRESOLVED__JP_ORIGINAL_MEASUREMENT_REQUIRED",
+  "release_status": "HOLD"
+}
