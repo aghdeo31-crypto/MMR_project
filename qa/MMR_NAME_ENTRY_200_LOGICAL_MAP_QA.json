@@ -1,0 +1,22 @@
+{
+  "schema": "MMR_NAME_ENTRY_200_LOGICAL_MAP_V1",
+  "classification": "PASS_NAME_ENTRY_LOGICAL_IDENTITY",
+  "logical_chars": 200,
+  "unique_chars": 200,
+  "mapped_rows": 200,
+  "roundtrip_failures": [],
+  "all_in_ks2350": true,
+  "all_roundtrip": true,
+  "sentinels": {
+    "한": {"id":2210,"token":"08 0E E2"},
+    "힌": {"id":2344,"token":"08 0F C8"},
+    "이": {"id":1547,"token":"08 0A CB"},
+    "히": {"id":2342,"token":"08 0F C6"},
+    "탄": {"id":1999,"token":"08 0D AF"},
+    "약": {"id":1379,"token":"08 09 C3"},
+    "보": {"id":963,"token":"08 07 63"},
+    "급": {"id":155,"token":"08 01 FB"}
+  },
+  "rule": "screen logical index -> intended char -> KS2350 ID -> private token must be exact before runtime page binding",
+  "runtime_binding_status": "NOT_YET_PROVEN"
+}
