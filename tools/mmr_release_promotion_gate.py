@@ -22,7 +22,7 @@ def main():
     ap.add_argument('--jp-translation',required=True)
     ap.add_argument('--name-entry-original-compare',required=True)
     ap.add_argument('--name-entry-geometry',required=True)
-    ap.add_argument('--name-entry-rom-binding',required=True)
+    ap.add_argument('--name-entry-physical-binding',required=True)
     ap.add_argument('--runtime-matrix',required=True)
     ap.add_argument('--language-sweep',required=True)
     ap.add_argument('--candidate-sha256',required=True)
@@ -38,7 +38,7 @@ def main():
       'jp_translation':a.jp_translation,
       'name_entry_original_compare':a.name_entry_original_compare,
       'name_entry_geometry':a.name_entry_geometry,
-      'name_entry_rom_binding':a.name_entry_rom_binding,
+      'name_entry_physical_binding':a.name_entry_physical_binding,
       'runtime_matrix':a.runtime_matrix,
       'language_sweep':a.language_sweep}.items()}
     checks=[]
@@ -69,16 +69,14 @@ def main():
          'max_adjacent_row_overlap_px':(ng.get('candidate') or {}).get('max_adjacent_row_overlap_px'),
          'checks':ng_checks})
 
-    nb=docs['name_entry_rom_binding']
-    nbsha=(nb.get('candidate') or {}).get('sha256','').lower()
-    add('G3_name_entry_rom_binding',
-        nbsha==cand
-        and nb.get('classification')=='PASS_NAME_ENTRY_ROM_BINDING_EXACT'
-        and nb.get('all_pages_have_one_exact_hit') is True,
-        {'same_candidate':nbsha==cand,
-         'classification':nb.get('classification'),
-         'all_pages_have_one_exact_hit':nb.get('all_pages_have_one_exact_hit'),
-         'page_hit_counts':[x.get('hit_count') for x in (nb.get('pages') or [])]})
+    pb=docs['name_entry_physical_binding']
+    pb_same=pb.get('candidate_sha256','').lower()==cand
+    add('G3_name_entry_physical_binding_full',
+        pb_same and pb.get('classification')=='PASS_NAME_ENTRY_PHYSICAL_BINDING_FULL'
+        and pb.get('full_pass') is True,
+        {'same_candidate':pb_same,'classification':pb.get('classification'),
+         'static_pass':pb.get('static_pass'),'full_pass':pb.get('full_pass'),
+         'runtime_failures':pb.get('runtime_failures')})
 
     i=docs['identity']
     add('G4_glyph_identity',
@@ -136,7 +134,7 @@ def main():
 
     allowed=all(x['pass'] for x in checks)
     out={
-      'schema':'MMR_THIRD_ATTEMPT_RELEASE_PROMOTION_V4_NAME_BINDING_LOCKED',
+      'schema':'MMR_THIRD_ATTEMPT_RELEASE_PROMOTION_V5_FORMAT_AGNOSTIC_NAME_BINDING',
       'candidate_sha256':cand,
       'classification':'RELEASE_ALLOWED' if allowed else 'HOLD_RELEASE_NOT_ALLOWED',
       'release_allowed':allowed,
@@ -145,7 +143,8 @@ def main():
       'hard_rules':[
         'Name-entry original-JP comparison must PASS on the same candidate SHA.',
         'Automatic name-entry geometry compare must PASS with adjacent-row overlap = 0 px.',
-        'All four 50-entry name pages must exist exactly once in candidate ROM binding gate.',
+        'Name-entry physical binding must be FULL PASS using a confirmed original-JP encoding/storage contract.',
+        'No private08/1-byte/2-byte/dialogue-code assumption is accepted without physical evidence.',
         'All critical SYSTEM/UI/NAME_ENTRY runtime paths must PASS.',
         'One exact candidate SHA only; no cross-build evidence mixing.'
       ]
