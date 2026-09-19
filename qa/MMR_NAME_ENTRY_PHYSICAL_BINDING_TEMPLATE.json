@@ -1,0 +1,25 @@
+{
+  "schema": "MMR_NAME_ENTRY_PHYSICAL_BINDING_CONTRACT_V1",
+  "original_rom_sha256": "6a68e1806d8d72accb4a5218330210e178880216863c1c38b8865032c5c28724",
+  "candidate_sha256": "",
+  "encoding_contract": {
+    "confirmed": false,
+    "selection_table_encoding": "",
+    "name_buffer_encoding": "",
+    "terminator_or_length_contract": "",
+    "evidence": ""
+  },
+  "pages": [
+    {"page":1,"logical_indices":[],"physical_table_evidence_confirmed":false,"evidence":""},
+    {"page":2,"logical_indices":[],"physical_table_evidence_confirmed":false,"evidence":""},
+    {"page":3,"logical_indices":[],"physical_table_evidence_confirmed":false,"evidence":""},
+    {"page":4,"logical_indices":[],"physical_table_evidence_confirmed":false,"evidence":""}
+  ],
+  "mappings": [],
+  "runtime_contract": {
+    "selection_to_buffer_path_confirmed": false,
+    "delete_complete_cancel_semantics_confirmed": false,
+    "save_reset_load_roundtrip_confirmed": false,
+    "evidence": ""
+  }
+}
