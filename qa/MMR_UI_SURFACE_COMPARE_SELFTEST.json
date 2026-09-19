@@ -1,0 +1,10 @@
+{
+  "schema": "MMR_UI_SURFACE_COMPARE_SELFTEST_V1",
+  "classification": "PASS",
+  "synthetic_regions": 2,
+  "expected_visible_height_px": 9,
+  "expected_anchor_match": true,
+  "expected_crop_edge_touch": false,
+  "analyzer_result": "PASS_UI_FONT_SURFACES",
+  "note": "Synthetic geometry selftest only; no REAL MMR UI evidence promoted."
+}
