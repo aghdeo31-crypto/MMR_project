@@ -1,0 +1,14 @@
+{
+  "schema": "MMR_NAME_ENTRY_WRAM_DIFF_SELFTEST_V1",
+  "classification": "PASS",
+  "synthetic_wram_bytes": 131072,
+  "synthetic_name_field": {
+    "address": "0x7E1234",
+    "width": 2,
+    "three_distinct_variant_values": true,
+    "delete_restores_base": true
+  },
+  "unrelated_volatile_address": "0x7E5000",
+  "analyzer_result": "NAME_BUFFER_DIFFERENTIAL_CANDIDATES",
+  "note": "Synthetic mechanics only; no REAL MMR name buffer authority."
+}
