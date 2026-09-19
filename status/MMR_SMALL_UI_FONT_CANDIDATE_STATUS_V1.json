@@ -1,0 +1,30 @@
+{
+  "schema": "MMR_SMALL_UI_FONT_CANDIDATE_STATUS_V1",
+  "date_kst": "2026-09-19",
+  "classification": "FULL_KS2350_SMALL_FONT_STATIC_READY__SURFACE_BINDING_OPEN",
+  "release_allowed": false,
+  "primary_compact_candidate": {
+    "family": "MMR Mona10 UI Custom v0.2",
+    "base": "Mona10 Regular",
+    "native_px": 10,
+    "raster_candidate": [10,12],
+    "coverage": "KS2350 2350/2350",
+    "blank": 0,
+    "clipped": 0,
+    "duplicate_bitmap_groups": 0
+  },
+  "rejected": {
+    "Mona10-Bold": {
+      "reason": "26.4% denser than Regular and produces an exact duplicate glyph group",
+      "duplicate_sample": ["틤","팀"]
+    }
+  },
+  "open": [
+    "measure each P0 Japanese UI surface",
+    "bind only proven compatible renderers to Mona10 UI candidate",
+    "extract actual P0 Korean UI corpus",
+    "review/customize only close pairs used by P0 surfaces",
+    "runtime compare same candidate SHA"
+  ],
+  "hard_rule": "Full KS2350 coverage does not authorize reuse on every UI surface."
+}
