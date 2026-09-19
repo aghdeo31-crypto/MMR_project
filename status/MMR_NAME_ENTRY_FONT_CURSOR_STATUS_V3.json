@@ -1,0 +1,38 @@
+{
+  "schema": "MMR_NAME_ENTRY_FONT_CURSOR_STATUS_V3",
+  "date_kst": "2026-09-19",
+  "classification": "MONA10_CUSTOM_V0_2_PRIMARY__JP_CURSOR_GEOMETRY_BLOCKED",
+  "release_allowed": false,
+  "dialogue_font": {
+    "family": "MMR Mona12 Custom",
+    "base_px": 12,
+    "raster": [12,12]
+  },
+  "name_entry_font": {
+    "family": "MMR Mona10 Custom v0.2",
+    "base_px": 10,
+    "raster_candidate": [10,12],
+    "same_as_dialogue_font": false,
+    "geometric_scaling": false,
+    "logical_chars": 200,
+    "blank": 0,
+    "clipped": 0,
+    "duplicate_bitmap_groups": 0,
+    "distance_le_1_pairs": 0,
+    "distance_le_2_pairs": 2,
+    "remaining_low_distance_pairs": ["로/토","트/르"]
+  },
+  "superseded": [
+    "Mona10 Custom v0.1 broad EU trim",
+    "name-entry uses dialogue 12x12 font assumption"
+  ],
+  "fatal_blockers": [
+    "measure original-JP name-entry glyph occupancy",
+    "measure original cursor row step/height/anchor",
+    "prove adjacent-row cursor overlap is 0 px",
+    "bind Mona10 v0.2 to verified small-font physical path",
+    "verify all 200 visible glyphs equal selected glyphs",
+    "save/reset/load and state-exit regression"
+  ],
+  "hard_rule": "Font art and cursor geometry are separate contracts. Do not move/scale the font to conceal a cursor geometry bug."
+}
