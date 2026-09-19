@@ -1,5 +1,5 @@
 {
-  "schema": "MMR_RUNTIME_MATRIX_V3_NAME_CURSOR_CRITICAL",
+  "schema": "MMR_RUNTIME_MATRIX_V4_NAME_FONT_CURSOR_CRITICAL",
   "candidate_sha256": "",
   "classification": "PENDING",
   "priority": "SYSTEM_UI_NAME_ENTRY_FIRST",
@@ -53,6 +53,22 @@
       "notes": "default/initial contents and cursor state"
     },
     {
+      "id": "NAME_ENTRY_FONT_SIZE_VS_ORIGINAL",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "name-entry glyph bbox/occupancy must match original class; do not reuse dialogue 12x12 size"
+    },
+    {
+      "id": "NAME_ENTRY_FONT_BASELINE_VS_ORIGINAL",
+      "class": "NAME_ENTRY",
+      "critical": true,
+      "status": "PENDING",
+      "capture": "",
+      "notes": "top/bottom margin and vertical anchor"
+    },
+    {
       "id": "NAME_ENTRY_PAGE_1",
       "class": "NAME_ENTRY",
       "critical": true,
@@ -90,7 +106,7 @@
       "critical": true,
       "status": "PENDING",
       "capture": "",
-      "notes": "repeat multiple cycles; no stale page/source bank"
+      "notes": "repeat cycles; no stale page/source bank"
     },
     {
       "id": "NAME_ENTRY_CURSOR_VERTICAL_GEOMETRY",
@@ -269,5 +285,5 @@
       "notes": ""
     }
   ],
-  "hard_rule": "All critical SYSTEM/UI/NAME_ENTRY paths must PASS on the exact candidate SHA. Cursor overlap with adjacent name-entry rows is an automatic hard FAIL."
+  "hard_rule": "All critical SYSTEM/UI/NAME_ENTRY paths must PASS on the exact candidate SHA. Wrong name-entry font size or adjacent-row cursor overlap is an automatic hard FAIL."
 }
