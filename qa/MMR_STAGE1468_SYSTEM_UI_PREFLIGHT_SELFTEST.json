@@ -1,0 +1,18 @@
+{
+  "schema": "MMR_STAGE1468_SYSTEM_UI_PREFLIGHT_SELFTEST_V1",
+  "classification": "STATIC_SCRIPT_REVIEW_PASS",
+  "required_gates": [
+    "KS2350 identity",
+    "exact 4-page name-entry ROM binding",
+    "original-vs-candidate five-row name-entry geometry",
+    "seven P0 fixed system/UI surface comparisons"
+  ],
+  "hard_behavior": [
+    "exact candidate SHA required",
+    "missing P0 capture plan entry is fatal",
+    "any child analyzer nonzero exit is fatal",
+    "preflight PASS only allows runtime test candidate",
+    "release remains false"
+  ],
+  "new_real": false
+}
