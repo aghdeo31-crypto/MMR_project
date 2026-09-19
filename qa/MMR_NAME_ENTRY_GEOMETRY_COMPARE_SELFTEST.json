@@ -1,0 +1,24 @@
+{
+  "schema": "MMR_NAME_ENTRY_GEOMETRY_COMPARE_SELFTEST_V1",
+  "classification": "PASS",
+  "synthetic_original": {
+    "row_step_px": 16,
+    "cursor_height_px": 12,
+    "adjacent_row_overlap_px": 0
+  },
+  "synthetic_candidate": {
+    "row_step_px": 16,
+    "cursor_height_px": 12,
+    "adjacent_row_overlap_px": 0
+  },
+  "analyzer_result": "PASS_NAME_ENTRY_GEOMETRY",
+  "checks": {
+    "candidate_adjacent_row_overlap_zero": true,
+    "candidate_row_step_stable": true,
+    "original_row_step_stable": true,
+    "row_step_matches_original": true,
+    "cursor_height_matches_original": true,
+    "name_font_visible_height_matches_original": true
+  },
+  "note": "Synthetic analyzer selftest only. No REAL MMR geometry promoted."
+}
