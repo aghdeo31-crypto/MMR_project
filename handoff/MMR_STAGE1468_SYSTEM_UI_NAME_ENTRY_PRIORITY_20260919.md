@@ -280,4 +280,76 @@ Therefore:
 - no REAL runtime result claimed
 - new work remains fail-closed static/offline preparation
 
+## Name-entry physical discovery pipeline — added
+
+When the physical Japanese name encoding/buffer is still unknown, do not guess.
+Use the new differential pipeline before filling the physical-binding contract.
+
+### Phase 1
+Runner:
+- scripts/RUN_NAME_ENTRY_DISCOVERY_PHASE1.ps1
+- commit 2d2e1ad11af8f9b609e19fc7fc360699a4e3167c
+
+Inputs:
+- slot1 WRAM experiment manifest
+- slot2 WRAM experiment manifest
+
+Pipeline:
+1. mmr_name_entry_wram_diff.py
+2. mmr_name_entry_wram_stride.py
+3. mmr_name_entry_generate_write_pc_probe.py
+
+Outputs:
+- slot1 differential candidates
+- slot2 differential candidates
+- compact buffer stride candidates
+- targeted read-only Mesen WRITE callback Lua
+
+### Phase 2
+Runner:
+- scripts/RUN_NAME_ENTRY_DISCOVERY_PHASE2.ps1
+- commit 38330d370402b5ae324e6deb8bc9f026682d12ea
+
+Inputs:
+- three independent write-callback logs for three distinct original-JP characters
+
+Pipeline:
+1. recurrent writer-PC parse
+2. writer-context probe generation
+
+Outputs:
+- recurrent name-entry writer PC candidate
+- bounded writer-context Lua
+
+### Writer context
+Tools:
+- tools/mmr_name_entry_generate_writer_context_probe.py
+- tools/mmr_name_entry_parse_writer_context.py
+
+Writer context freezes:
+- A/X/Y/S/D/DB/P/E
+- 48-byte code window around writer
+- native/emulation stack interpretations
+- direct-page neighborhood
+
+Still not authority until:
+- mode-aware 65C816 dataflow connects real selection table -> physical code -> buffer write;
+- slot1/slot2 field relationship is confirmed;
+- delete/complete/cancel semantics are confirmed;
+- save/reset/load is confirmed.
+
+Pipeline status:
+- status/MMR_NAME_ENTRY_DISCOVERY_PIPELINE_V1.json
+- commit 27814b475d6fd3e1bf6e494617a599177642ee71
+
+WRAM differential tools:
+- mmr_name_entry_wram_diff.py commit 3c6d9f90e69e998b54d17e36f4f18b4958357920
+- mmr_name_entry_wram_stride.py commit 87c0ca14769a3f3a8760a065e88ef96bb9e526a5
+- write-PC generator commit d96ad6c34fb833911e825a43e0c60bdb8b531937
+- write-PC parser commit 951143f2f85cf9d01e5f44af1b1a693ad51ae207
+- writer-context generator commit 0692b17b45afa7fa802c1d33adda4072a489d5a4
+- writer-context parser commit e67d27860d6ca8e1691b5addcb89d21b21fd5a84
+
+This discovery path is Japanese-original-first and never assumes dialogue token encoding for names.
+
 NO_NEW_REAL.
