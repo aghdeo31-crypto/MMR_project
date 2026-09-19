@@ -1,0 +1,33 @@
+{
+  "schema": "MMR_SYSTEM_UI_FONT_WORK_STATUS_V1",
+  "date_kst": "2026-09-19",
+  "classification": "SYSTEM_UI_FONT_INVENTORY_IN_PROGRESS",
+  "release_allowed": false,
+  "confirmed": [
+    "Dialogue and name-entry must not share one assumed 12x12 font contract.",
+    "Name-entry primary candidate is native Mona10-based custom small font.",
+    "Name-entry cursor geometry is independently gated against Japanese original.",
+    "Historical 8x8/8x12/8x16 prototypes exist, but surface-to-size mapping is not authoritative."
+  ],
+  "open_p0_surfaces": [
+    "MEMORY_CENTER_NOTICE",
+    "RECORD_SELECTION",
+    "MAIN_MENU",
+    "ITEM_EQUIPMENT_STATUS",
+    "SHOP_SERVICE_UI",
+    "BATTLE_UI",
+    "SAVE_LOAD_UI"
+  ],
+  "name_entry": {
+    "font_candidate": "MMR Mona10 Name Custom v0.2",
+    "logical_identity": "200/200 PASS",
+    "static_font_structure": "PASS",
+    "geometry": "REAL_ORIGINAL_CAPTURE_PENDING",
+    "runtime": "PENDING"
+  },
+  "dialogue": {
+    "font_candidate": "MMR Mona12 Custom",
+    "runtime": "PENDING_AFTER_SYSTEM_UI"
+  },
+  "hard_rule": "System/UI font-family inventory and P0 runtime regression precede dialogue polish and release packaging."
+}
