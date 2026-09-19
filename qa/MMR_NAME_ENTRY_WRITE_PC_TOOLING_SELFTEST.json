@@ -1,0 +1,9 @@
+{
+  "schema": "MMR_NAME_ENTRY_WRITE_PC_TOOLING_SELFTEST_V1",
+  "classification": "STATIC_TOOLING_READY",
+  "generator_input": "MMR_NAME_ENTRY_WRAM_DIFF_V1 strong fields",
+  "generated_probe": "read-only Mesen callbackType.write on selected candidate ranges",
+  "parser_requirement": "same writer PC across >=3 independent labeled logs",
+  "authority_after_parse": false,
+  "note": "No REAL runtime evidence is promoted by this selftest."
+}
