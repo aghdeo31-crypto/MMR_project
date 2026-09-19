@@ -1,0 +1,30 @@
+{
+  "schema": "MMR_NAME_ENTRY_DISCOVERY_PIPELINE_V1",
+  "date_kst": "2026-09-19",
+  "classification": "OFFLINE_PIPELINE_READY_RUNTIME_EVIDENCE_PENDING",
+  "phase1": {
+    "input": ["slot1 WRAM experiment manifest","slot2 WRAM experiment manifest"],
+    "steps": ["WRAM differential","slot stride correlation","targeted WRITE callback Lua generation"],
+    "runner": "scripts/RUN_NAME_ENTRY_DISCOVERY_PHASE1.ps1"
+  },
+  "phase2": {
+    "input": ["three independent write-callback logs for three distinct JP chars"],
+    "steps": ["recurrent writer PC ranking","bounded writer-context Lua generation"],
+    "runner": "scripts/RUN_NAME_ENTRY_DISCOVERY_PHASE2.ps1"
+  },
+  "phase3_manual_analysis": [
+    "run writer-context Lua in >=3 controlled sessions",
+    "freeze stable 48-byte writer code window",
+    "mode-aware 65C816 disassembly",
+    "trace source/table read into writer",
+    "confirm slot1/slot2 physical payload relationship",
+    "confirm delete/complete/cancel",
+    "confirm save/reset/load"
+  ],
+  "authority": {
+    "name_encoding_proven": false,
+    "name_buffer_proven": false,
+    "release_allowed": false
+  },
+  "hard_rule": "No private08/KS2350/dialogue-code assumption. Physical contract comes only from original-JP runtime/dataflow evidence."
+}
