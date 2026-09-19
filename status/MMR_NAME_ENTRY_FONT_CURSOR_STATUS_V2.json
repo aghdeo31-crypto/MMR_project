@@ -1,0 +1,43 @@
+{
+  "schema": "MMR_NAME_ENTRY_FONT_CURSOR_STATUS_V2",
+  "date_kst": "2026-09-19",
+  "classification": "STATIC_SMALL_FONT_CANDIDATE__ORIGINAL_GEOMETRY_BLOCKED",
+  "release_allowed": false,
+  "dialogue_font": {
+    "family": "MMR Mona12 Custom",
+    "base": "Mona12 Regular",
+    "font_px": 12,
+    "raster": [12,12]
+  },
+  "name_entry_font": {
+    "family": "MMR Mona10 Name Custom v0.1",
+    "base": "Mona10 Regular",
+    "font_px": 10,
+    "raster_candidate": [10,12],
+    "geometric_scaling": false,
+    "logical_glyphs": 200,
+    "blank": 0,
+    "clipped": 0,
+    "duplicate_bitmap_groups": 0,
+    "visible_body_width_px": "8..9",
+    "visible_body_height_px": "8..9",
+    "custom_changed_glyphs": ["은","근","승","플","흑","늑"]
+  },
+  "superseded": [
+    "name-entry glyphs are assumed to be the same 12x12 size as dialogue"
+  ],
+  "retained": [
+    "4 pages x 50 logical chars",
+    "10 columns x 5 rows as logical table candidate",
+    "Japanese original is geometry/behavior authority"
+  ],
+  "fatal_blockers": [
+    "measure original-JP name-entry physical glyph size",
+    "measure original cursor Y step/height/anchor",
+    "prove candidate cursor adjacent-row overlap is 0 px",
+    "bind small font to verified physical slots",
+    "runtime 200 visible glyph -> selected glyph identity",
+    "name buffer/save/reset/load original comparison"
+  ],
+  "hard_rule": "Do not tune cursor by moving the font. Fix font geometry and cursor geometry as separate contracts."
+}
